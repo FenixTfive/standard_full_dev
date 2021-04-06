@@ -1,0 +1,464 @@
+<style type="text/css">
+  .rkd-000-lightbox-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1010000;
+    width: 100%;
+    height: 100%;
+    /* //background: rgba(0,0,0,.6) url(https://s3.amazonaws.com/images.rkd.io/common/overlay-trans.png) scroll repeat 0 0; */
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+  .rkd-000-mobile-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1010000;
+    width: 100%;
+    height: 100%;
+    /* //background: rgba(0,0,0,.6) url(https://s3.amazonaws.com/images.rkd.io/common/overlay-trans.png) scroll repeat 0 0; */
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+  .rkd-000-popup {
+    margin: 0 auto;
+    position: fixed;
+    top: 10%;
+    left: 0.1%;
+    right: 0.1%;
+    z-index: 1011000;
+    width: 100%;
+    max-width: 600px;
+  }
+  .rkd-000-desk-content {
+    width: 100%;
+    box-shadow: 0px 0px 30px #000000;
+    background: rgba(0, 0, 0, 0.4);
+  }
+  .rkd-000-popup .rkd-000-close-button {
+    margin: 0;
+    opacity: 1;
+    position: absolute;
+    right: -7px;
+    top: -30px;
+    text-align: center;
+    border-radius: 50%;
+    font-size: 20px;
+    line-height: 27px;
+    font-weight: bold;
+    text-decoration: none;
+    font-family: Tahoma, Verdana, sans-serif;
+    display: block;
+    width: 28px;
+    height: 28px;
+    /*background-color: #084c66;*/
+    color: #fff;
+  }
+
+  a.rkd-000-donate-now {
+    left: 57%;
+    position: absolute;
+    bottom: 4%;
+    display: block;
+    color: #fff;
+    width: 40%;
+    height: 13%;
+    outline: none !important;
+  }
+  .rkd-000-countdown-desktop {
+    bottom: 0%;
+    left: 12%;
+    width: 40%;
+    position: absolute;
+  }
+
+  .rkd-000-mobile-lb {
+    display: none;
+  }
+  /* manage link for learn more button */
+  a.rkd-000-resources-link {
+    left: 37%;
+    top: 73%;
+    position: absolute;
+    width: 26%;
+    height: 11%;
+    display: none;
+  }
+  /* End manage link for learn more button */
+  /* manage the meals input */
+  .rkd-000-amount {
+    top: 71.5%;
+    position: absolute;
+    left: 76.5%;
+    display: block;
+    border: none !important;
+    width: 106px;
+    height: 35px;
+    text-align: right;
+    font-size: 18px;
+    background: none;
+    font-family: sans-serif;
+  }
+  #rkd-000-dollar {
+    left: 0px;
+    line-height: 26px;
+    font-size: 18px;
+  }
+  .rkd-000-amount > span,
+  .rkd-000-amount > input {
+    color: #444;
+  }
+
+  .rkd-000-amount > span {
+    position: absolute;
+    margin: 0 0 0 5px;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 800;
+    font-size: 45px;
+  }
+  .rkd-000-amount > input {
+    padding-left: 17px;
+    width: 100%;
+  }
+  /* End manage the meals input */
+
+  @media screen and (min-width: 601px) {
+    .rkd-000-popup .rkd-000-close-button {
+      top: -36px;
+      margin: 0;
+      opacity: 1;
+      position: absolute;
+      right: -11px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .rkd-000-popup {
+      width: 90%;
+    }
+    .rkd-000-desktop-lb,
+    .rkd-000-desk-content,
+    .rkd-000-countdown-desktop,
+    .rkd-000-desktop-overlay {
+      display: none !important;
+    }
+    .rkd-000-mobile-lb,
+    .rkd-000-mobile-overlay {
+      display: block;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    .rkd-000-mobile-content {
+      width: 100%;
+      box-shadow: 0px 0px 30px #000000;
+      background: rgba(0, 0, 0, 0.4);
+    }
+    .rkd-000-popup .rkd-000-close-button {
+      margin: 0;
+      opacity: 1;
+      position: absolute;
+      right: -7px;
+      top: -30px;
+      text-align: center;
+      border-radius: 50%;
+      font-size: 20px;
+      line-height: 27px;
+      font-weight: bold;
+      text-decoration: none;
+      font-family: Tahoma, Verdana, sans-serif;
+      display: block;
+      width: 28px;
+      height: 28px;
+      /*background-color: #084c66;*/
+      color: #fff;
+    }
+
+    .rkd-000-countdown-mobile {
+      bottom: 0%;
+      left: 19%;
+      width: 65%;
+      position: absolute;
+    }
+    #rkd-000-dollar {
+      left: 0px;
+      line-height: 24px;
+      font-size: 18px;
+    }
+    .rkd-000-amount {
+      top: 70.5%;
+      position: absolute;
+      left: 75.5%;
+      display: block;
+      border: none !important;
+      width: 70px;
+      height: 35px;
+      text-align: right;
+      font-size: 18px;
+      background: none;
+      font-family: sans-serif;
+    }
+    a.rkd-000-resources-link {
+      left: 37%;
+      top: 73%;
+      position: absolute;
+      width: 26%;
+      height: 11%;
+      display: none;
+    }
+  }
+</style>
+
+<script type="text/javascript">
+  (function () {
+    var cookieName = "cookie_test";
+    var previewMode = true;
+    var previewType = "session"; //always: display always the LB --  session: Display the LB per session storage -- standard: Display de LB per day, hours, minutes
+    var timeVal = 1; //applies with standard
+    var desktopOnly = false;
+    var timerMode = false;
+    var DynamicFieldAndButton = true; //if "false", the option form learn more and donate now will be available
+    var mealsUrlParam = "&&chosen"; // some use &set.DonationAmount
+
+    //Create cookies function
+    function createCookie(name, value, days) {
+      var date, expires;
+      if (days) {
+        date = new Date();
+        date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+        expires = "; expires=" + date.toGMTString();
+      } else {
+        expires = "";
+      }
+      document.cookie = name + "=" + value + expires + "; path=/";
+    }
+
+    //Handler for live and preview mode
+    function lightboxHandler(previewMode, previewType, cookieName, timeVal) {
+      //Lightbox in live mode
+      if (!previewMode) {
+        switch (previewType) {
+          case "always":
+            showLightBox(); //display the LB always
+            break;
+          case "session":
+            // analized if a session coolie exist
+            var isNewSession = sessionStorage.getItem(cookieName)
+              ? false
+              : true;
+            // Review if the SB was previously displayed
+            if (!isNewSession) {
+              return;
+            }
+            showLightBox(); // Show Lightbox
+            sessionStorage.setItem(cookieName, "displayed"); // Create the session variable
+            break;
+
+          default:
+            //review if the LB was displayed before
+            if (document.cookie.indexOf(cookieName) !== -1) {
+              return;
+            }
+
+            createCookie(cookieName, "true", timeVal); //create the cookie and show the lightbox
+            showLightBox();
+            break;
+        }
+      } else {
+        //Variable to add the cookie name to the test url
+        var testingUrl = new RegExp(cookieName);
+        //Show the lightbox in preview mode
+        if (previewMode === true && window.location.href.match(testingUrl)) {
+          showLightBox();
+        }
+      }
+    }
+
+    // timer and dynamic fields handler
+    function cssHandler(desktopOnly, timerMode, DynamicFieldAndButton) {
+      //desktop timer handler-----------
+      document.querySelector(
+        ".rkd-000-countdown-desktop"
+      ).style.display = !timerMode ? "none" : "block";
+      // ------desktop timer handler
+      //show - hide mobile content including timer--------------
+      if (!desktopOnly) {
+        document.querySelector(
+          ".rkd-000-countdown-mobile"
+        ).style.display = !timerMode ? "none" : "block";
+      } else {
+        var mobileContent = document.querySelector(".rkd-000-mobile-lb");
+        mobileContent.setAttribute("style", "display:none !important");
+        var mobileOverlay = document.querySelector(".rkd-000-mobile-overlay");
+        mobileOverlay.setAttribute("style", "display:none !important");
+      }
+      //------------------show - hide mobile content including timer
+      //show -hide resources link or meals dynamic field------------------
+      var resources = document.querySelectorAll(".rkd-000-resources-link");
+      resources.forEach(function (userItem) {
+        !DynamicFieldAndButton &&
+          userItem.setAttribute("style", "display:block !important");
+        DynamicFieldAndButton && userItem.setAttribute("style", "display:none");
+      });
+
+      var amountField = document.querySelectorAll(".rkd-000-amount");
+      amountField.forEach(function (userItem) {
+        !DynamicFieldAndButton &&
+          userItem.setAttribute("style", "display:none");
+        DynamicFieldAndButton &&
+          userItem.setAttribute("style", "display:block");
+      });
+      //---------show -hide resources link or meals dynamic field
+    }
+
+    lightboxHandler(previewMode, previewType, cookieName, timeVal);
+    cssHandler(desktopOnly, timerMode, DynamicFieldAndButton);
+
+    //Remove the lightbox when escape key is press
+    document.addEventListener("keyup", function (e) {
+      if (e.which == 27) {
+        document.querySelector(
+          ".rkd-000-desktop-lb,.rkd-000-desktop-overlay,.rkd-000-mobile-lb,.rkd-000-mobile-overlay"
+        ).style.display = "none";
+      }
+    });
+
+    //Function to show the lightbox
+    function showLightBox() {
+      //-----------------visual information
+      var mobileImage =
+          "https://s3.amazonaws.com/xtemp19.lb/FCENC/201030-FCENC-14211-12-Dec-2020-HolidayMeals-lightbox-v03.jpg",
+        desktopimage =
+          "https://s3.amazonaws.com/xtemp19.lb/FCENC/201030-FCENC-14211-12-Dec-2020-HolidayMeals-lightbox-v03.jpg",
+        donateLink =
+          "http://secure.foodbankcenc.org/site/Donation2?12264.donation=form1&df_id=12264&mfc_pref=T&multiply=10&s_src=lightbox",
+        mobileUrlLink = "",
+        timerImage = "https://img1.niftyimages.com/s31/s8yo/-f5d",
+        resourcesLink = "";
+
+      var popup =
+        '<div class="rkd-000-popup rkd-000-desktop-lb"><div class="rkd-000-content"><a class="rkd-000-resources-link" href="' +
+        resourcesLink +
+        '"></a><img src="' +
+        desktopimage +
+        '" class="rkd-000-desk-content"/><div class="rkd-000-amount"><span id="rkd-000-dollar">$</span><input class="rkd-000-amount-val-triple" type="text" maxlength="6" value="100"></div><a class="rkd-000-donate-now" href="' +
+        donateLink +
+        '"></a><img src="' +
+        timerImage +
+        '" class="rkd-000-countdown-desktop"/></div><div><a href="#" class="rkd-000-close-button">x</a></div></div><div class="rkd-000-lightbox-overlay rkd-000-desktop-overlay"></div>' +
+        '<div class="rkd-000-popup rkd-000-mobile-lb"><div class="rkd-000-content"><a class="rkd-000-resources-link" href="' +
+        resourcesLink +
+        '"></a><img src="' +
+        desktopimage +
+        '" class="rkd-000-mobile-content"/><div class="rkd-000-amount"><span id="rkd-000-dollar">$</span><input class="rkd-000-amount-val-triple" type="text" maxlength="6" value="100"></div><a class="rkd-000-donate-now" href="' +
+        (donateLink || mobileUrlLink) +
+        '"></a><img src="' +
+        timerImage +
+        '" class="rkd-000-countdown-mobile"/></a></div><div><a href="#" class="rkd-000-close-button">x</a></div></div><div class="rkd-000-lightbox-overlay rkd-000-mobile-overlay"></div>';
+
+      //------------Create a new holder div for the lightbox--------
+      var i = document.createElement("DIV");
+      i.id = "lightboxAppend";
+
+      //Append to the body
+      document.getElementsByTagName("body")[0].appendChild(i);
+
+      //Set the html of the new div to be our lightbox
+      i.innerHTML = popup;
+      //---------------End create lightbox---------
+
+      //-------showing and closing lightbox-----------
+      //Grab the dark overlay and lightbox from the dom
+      var overlay = document.querySelector(".rkd-000-lightbox-overlay");
+      var popupLightbox = document.querySelector(".rkd-000-popup");
+      var overlayMobile = document.querySelector(".rkd-000-mobile-overlay");
+      var popupLightboxMobile = document.querySelector(".rkd-000-mobile-lb");
+      var backdrop = document.querySelectorAll(".rkd-000-lightbox-overlay");
+
+      var mealsVal = document.querySelector(".rkd-000-amount-val-triple");
+
+      //Show the lightbox
+      overlay.style.display = "block";
+      popupLightbox.style.display = "block";
+
+      //Remove the lightbox when the close button is clicked
+      document
+        .querySelector(".rkd-000-popup .rkd-000-close-button ")
+        .addEventListener("click", function (e) {
+          e.preventDefault();
+          overlay.style.display = "none";
+          popupLightbox.style.display = "none";
+          overlayMobile.style.display = "none";
+          popupLightboxMobile.style.display = "none";
+        });
+      //Remove the lightbox when the close button on mobile is clicked
+      document
+        .querySelector(".rkd-000-mobile-lb .rkd-000-close-button ")
+        .addEventListener("click", function (e) {
+          e.preventDefault();
+          overlay.style.display = "none";
+          popupLightbox.style.display = "none";
+          overlayMobile.style.display = "none";
+          popupLightboxMobile.style.display = "none";
+        });
+
+      //Remove the lightbox when the overlay is clicked
+      for (var i = 0; i < backdrop.length; i++) {
+        backdrop[i].addEventListener("click", hideItFunction, false);
+      }
+      function hideItFunction() {
+        for (i = 0; i < popupLightbox.length; i++) {
+          popupLightbox[i].style.display = "none";
+        }
+        for (i = 0; i < backdrop.length; i++) {
+          backdrop[i].style.display = "none";
+        }
+      }
+      // //-------End showing and closing lighbox-----------
+
+      //----------------meals handler-----------
+      DynamicFieldAndButton &&
+        document
+          .querySelector(".rkd-000-donate-now")
+          .addEventListener("click", function (e) {
+            e.preventDefault();
+
+            var total = Number(mealsVal.value);
+            console.log("Donation Amount: " + total);
+            var donateUrl = donateLink + mealsUrlParam + "=" + total;
+
+            if (total !== "" && total > 0) {
+              window.open(donateUrl, "_parent");
+            }
+          });
+      //----------------End meals handler-----------
+
+      //------------------GA Management-----------------
+      //Push Data Event to Google Analytics on Click
+      if (document.querySelector(".rkd-000-popup .rkd-000-donate-now")) {
+        var allDonateButtons = document.body.querySelectorAll(
+          ".rkd-000-popup .rkd-000-donate-now"
+        );
+
+        for (var x = 0; x < allDonateButtons.length; x++) {
+          allDonateButtons[x].addEventListener("click", function () {
+            window.dataLayer.push({
+              event: "dynamicEvent",
+              dynamicCategory: "lightbox",
+              dynamicAction: "click",
+              dynamicLabel: cookieName,
+            });
+          });
+        }
+      }
+
+      //Push Data Event to Google Analytics on Render
+      window.dataLayer.push({
+        event: "dynamicEvent",
+        dynamicCategory: "lightbox",
+        dynamicAction: "render",
+        dynamicLabel: cookieName,
+      });
+      //------------------End GA Management-----------------
+    }
+  })();
+</script>

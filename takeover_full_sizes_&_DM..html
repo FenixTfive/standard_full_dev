@@ -1,0 +1,376 @@
+<style type="text/css">
+  .rkd-TAKEOVER-000-lightbox-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 1120000000;
+  }
+
+  .rkd-TAKEOVER-000-popup {
+    position: fixed;
+    top: 0%;
+    right: 0.5%;
+    left: 0.5%;
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    font-size: 0;
+    z-index: 1125000000;
+  }
+
+  .rkd-TAKEOVER-000-popup .rkd-TAKEOVER-000-container {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: auto;
+  }
+
+  .rkd-TAKEOVER-000-close-header {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    text-align: right;
+  }
+
+  .rkd-TAKEOVER-000-close-header a.rkd-TAKEOVER-000-close-btn {
+    display: block;
+    font-size: 16px;
+    line-height: 3.6em;
+    color: #fff;
+    padding: 0 12%;
+    background-color: #5a6227;
+    z-index: 1025000000;
+  }
+
+  .rkd-TAKEOVER-000-content {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    /* height: auto; */
+  }
+
+  a.rkd-TAKEOVER-000-donate-now {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .rkd-TAKEOVER-000-desk-content {
+    display: block;
+    width: 100vw;
+    height: 93vh;
+    margin: 0 auto;
+    box-shadow: none;
+  }
+  .rkd-TAKEOVER-000-mobile-lb {
+    display: none;
+  }
+  @media screen and (max-width: 1024px) {
+    .rkd-TAKEOVER-000-popup {
+      width: 100%;
+    }
+    .rkd-TAKEOVER-000-mobile-content {
+      width: 100%;
+      height: 90%;
+    }
+    .rkd-TAKEOVER-000-close-header a.rkd-TAKEOVER-000-mobile-close-btn {
+      display: block;
+      font-size: 36px;
+      line-height: 3.6em;
+      color: #fff;
+      padding: 0 12%;
+      background-color: #5a6227;
+      z-index: 1025000000;
+      text-align: center;
+    }
+
+    .rkd-TAKEOVER-000-desktop-lb,
+    .rkd-TAKEOVER-000-desk-content,
+    .rkd-TAKEOVER-000-desktop-overlay {
+      display: none !important;
+    }
+    .rkd-TAKEOVER-000-mobile-lb,
+    .rkd-TAKEOVER-000-mobile-overlay {
+      display: block;
+    }
+  }
+  @media screen and (max-width: 768px) {
+    .rkd-TAKEOVER-000-popup {
+      width: 100%;
+    }
+    .rkd-TAKEOVER-000-mobile-content {
+      width: 100%;
+      height: 90%;
+    }
+    .rkd-TAKEOVER-000-close-header a.rkd-TAKEOVER-000-mobile-close-btn {
+      display: block;
+      font-size: 28px;
+      line-height: 3.6em;
+      color: #fff;
+      padding: 0 12%;
+      background-color: #5a6227;
+      z-index: 1025000000;
+      text-align: center;
+    }
+  }
+  @media screen and (max-width: 600px) {
+    .rkd-TAKEOVER-000-popup {
+      width: 100%;
+    }
+    .rkd-TAKEOVER-000-mobile-content {
+      width: 100%;
+      height: 90%;
+    }
+    .rkd-TAKEOVER-000-close-header a.rkd-TAKEOVER-000-mobile-close-btn {
+      display: block;
+      font-size: 20px;
+      line-height: 3.6em;
+      color: #fff;
+      padding: 0 12%;
+      background-color: #5a6227;
+      z-index: 1025000000;
+      text-align: center;
+    }
+  }
+  @media screen and (max-width: 410px) {
+    .rkd-TAKEOVER-000-popup {
+      width: 100%;
+    }
+    .rkd-TAKEOVER-000-mobile-content {
+      width: 100%;
+      height: 90%;
+    }
+    .rkd-TAKEOVER-000-close-header a.rkd-TAKEOVER-000-mobile-close-btn {
+      display: block;
+      font-size: 16px;
+      line-height: 3.6em;
+      color: #fff;
+      padding: 0 12%;
+      background-color: #5a6227;
+      z-index: 1025000000;
+      text-align: center;
+    }
+  }
+  /* galaxy fold */
+  @media screen and (max-width: 280px) {
+    .rkd-TAKEOVER-000-popup {
+      width: 100%;
+    }
+    .rkd-TAKEOVER-000-mobile-content {
+      width: 100%;
+      height: 90%;
+    }
+    .rkd-TAKEOVER-000-close-header a.rkd-TAKEOVER-000-mobile-close-btn {
+      display: block;
+      font-size: 15px;
+      line-height: 3.6em;
+      color: #fff;
+      padding: 0 12%;
+      background-color: #5a6227;
+      z-index: 1025000000;
+      text-align: center;
+    }
+  }
+</style>
+
+<script type="text/javascript">
+  (function () {
+    var cookieName = "cookie_test";
+    var previewMode = true;
+    var previewType = "session"; //always: display always the LB --  session: Display the LB per session storage -- standard: Display de LB per day, hours, minutes
+    var timeVal = 1; //applies with standard
+    var desktopOnly = true;
+    // Create cookies function
+    function createCookie(name, value, days) {
+      var date, expires;
+      if (days) {
+        date = new Date();
+        date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+        expires = "; expires=" + date.toGMTString();
+      } else {
+        expires = "";
+      }
+      document.cookie = name + "=" + value + expires + "; path=/";
+    }
+
+    //Handler for live and preview mode
+    function lightboxHandler(previewMode, previewType, cookieName, timeVal) {
+      //Lightbox in live mode
+      if (!previewMode) {
+        switch (previewType) {
+          case "always":
+            showLightBox(); //display the LB always
+            break;
+          case "session":
+            // analized if a session coolie exist
+            var isNewSession = sessionStorage.getItem(cookieName)
+              ? false
+              : true;
+            // Review if the SB was previously displayed
+            if (!isNewSession) {
+              return;
+            }
+            showLightBox(); // Show Lightbox
+            sessionStorage.setItem(cookieName, "displayed"); // Create the session variable
+            console.log("session");
+            break;
+
+          default:
+            //review if the LB was displayed before
+            if (document.cookie.indexOf(cookieName) !== -1) {
+              return;
+            }
+
+            createCookie(cookieName, "true", timeVal); //create the cookie and show the lightbox
+            showLightBox();
+            break;
+        }
+      } else {
+        //Variable to add the cookie name to the test url
+        var testingUrl = new RegExp(cookieName);
+        //Show the lightbox in preview mode
+        if (previewMode === true && window.location.href.match(testingUrl)) {
+          showLightBox();
+        }
+      }
+    }
+    //timer handler
+    function cssHandler(desktopOnly) {
+      // timer handler
+
+      if (desktopOnly) {
+        var mobileContent = document.querySelector(
+          ".rkd-TAKEOVER-000-mobile-lb"
+        );
+        mobileContent.setAttribute("style", "display:none !important");
+        var mobileOverlay = document.querySelector(
+          ".rkd-TAKEOVER-000-mobile-overlay"
+        );
+        mobileOverlay.setAttribute("style", "display:none !important");
+      }
+    }
+
+    lightboxHandler(previewMode, previewType, cookieName, timeVal);
+    cssHandler(desktopOnly);
+    // Function to show the lightbox
+    function showLightBox() {
+      var desktopImage =
+          "https://s3.amazonaws.com/xtemp19.lb/XNOLA/210305-XNOLA-Entergy-Match-HP-Takeover-Desktop-v3.jpg",
+        mobileImage =
+          "https://s3.amazonaws.com/xtemp19.lb/XNOLA/210305-XNOLA-Entergy-Match-HP-Takeover-Mobile-v4.jpg",
+        urlLink =
+          "https://s3.amazonaws.com/xtemp19.lb/XNOLA/210305-XNOLA-Entergy-Match-HP-Takeover-Mobile-v4.jpg",
+        mobileUrlLink = "",
+        continueName = "no-hunger.org";
+      //---------------------Screen reader variables
+      //    (1) the tags <img> which contains the hero and description must have an ID an a ALT with the text that is on the image
+      //        * id="id_name" alt="same_image_text"
+      //    (2) the tag <a> which contains the <img> with the text , must have a references to read that description first, so this tag (<a>) must have a reference to that id by using
+      //        aria-describedby="id_name"
+      //INSTEAD OF describedby="" and id=""  we can use aria-labelledby
+      var desktopId = "desktopLearnMore",
+        mobileId = "mobileLearnMore",
+        descriptionText =
+          "Become an ally for veteran empowerment and provide support that veterans and their families can count on. Learn more";
+
+      var popup =
+        '<div class="rkd-TAKEOVER-000-popup rkd-TAKEOVER-000-desktop-lb"><div class="rkd-TAKEOVER-000-container"><div class="rkd-TAKEOVER-000-close-header"><a href="#" class="rkd-TAKEOVER-000-close-btn">Continue to <strong>' +
+        continueName +
+        ' &raquo;</strong></a></div><div class="rkd-TAKEOVER-000-content"><a describedby="' +
+        desktopId +
+        '" class="rkd-TAKEOVER-000-donate-now" href="' +
+        urlLink +
+        '"><img src="' +
+        desktopImage +
+        '" class="rkd-TAKEOVER-000-desk-content"></a></div></div></div><div class="rkd-TAKEOVER-000-lightbox-overlay rkd-TAKEOVER-000-desktop-overlay"></div>"' +
+        '"<div class="rkd-TAKEOVER-000-popup rkd-TAKEOVER-000-mobile-lb"><div class="rkd-TAKEOVER-000-close-header"><a href="#" class="rkd-TAKEOVER-000-mobile-close-btn">Continue to <strong>' +
+        continueName +
+        ' &raquo;</strong></a></div><a describedby="' +
+        mobileId +
+        '" class="rkd-TAKEOVER-000-donate-now" href="' +
+        (urlLink || mobileUrlLink) +
+        '"><img src="' +
+        mobileImage +
+        '" class="rkd-TAKEOVER-000-mobile-content"/></a></div></div></div><div class="rkd-TAKEOVER-000-lightbox-overlay rkd-TAKEOVER-000-mobile-overlay"></div>';
+
+      // Create a new holder div for the lightbox
+      var i = document.createElement("DIV");
+      i.id = "lightboxAppend";
+
+      // Append to the body
+      document.getElementsByTagName("body")[0].appendChild(i);
+
+      // Set the html of the new div to be our lightbox
+      i.innerHTML = popup;
+
+      //Grab the dark overlay and lightbox from the dom
+      var overlay = document.querySelector(
+        ".rkd-TAKEOVER-000-lightbox-overlay"
+      );
+      var popupLightbox = document.querySelector(".rkd-TAKEOVER-000-popup");
+      var popupLightboxCloser = document.querySelectorAll(
+        ".rkd-TAKEOVER-000-popup"
+      );
+      var backdrop = document.querySelectorAll(
+        ".rkd-TAKEOVER-000-lightbox-overlay"
+      );
+
+      // Show the lightbox
+      overlay.style.display = "block";
+      popupLightbox.style.display = "block";
+
+      //Remove the lightbox when the close button is clicked
+      for (var i = 0; i < popupLightboxCloser.length; i++) {
+        popupLightboxCloser[i].addEventListener("click", hideItFunction, false);
+      }
+
+      //Remove the lightbox when the overlay is clicked
+      for (var i = 0; i < backdrop.length; i++) {
+        backdrop[i].addEventListener("click", hideItFunction, false);
+      }
+      function hideItFunction() {
+        for (i = 0; i < popupLightboxCloser.length; i++) {
+          popupLightboxCloser[i].style.display = "none";
+        }
+        for (i = 0; i < backdrop.length; i++) {
+          backdrop[i].style.display = "none";
+        }
+      }
+
+      // Push Data Event to Google Analytics on Click
+      if (
+        document.querySelector(
+          ".rkd-TAKEOVER-000-popup .rkd-TAKEOVER-000-donate-now"
+        )
+      ) {
+        var allDonateButtons = document.body.querySelectorAll(
+          ".rkd-TAKEOVER-000-popup .rkd-TAKEOVER-000-donate-now"
+        );
+
+        for (var x = 0; x < allDonateButtons.length; x++) {
+          allDonateButtons[x].addEventListener("click", function () {
+            window.dataLayer.push({
+              event: "dynamicEvent",
+              dynamicCategory: "lightbox",
+              dynamicAction: "click",
+              dynamicLabel: cookieName,
+            });
+          });
+        }
+      }
+
+      // Push Data Event to Google Analytics on Render
+      window.dataLayer.push({
+        event: "dynamicEvent",
+        dynamicCategory: "lightbox",
+        dynamicAction: "render",
+        dynamicLabel: cookieName,
+      });
+    }
+  })();
+</script>
