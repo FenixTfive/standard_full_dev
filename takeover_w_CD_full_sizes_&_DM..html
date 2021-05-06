@@ -371,7 +371,8 @@
       for (var i = 0; i < backdrop.length; i++) {
         backdrop[i].addEventListener("click", hideItFunction, false);
       }
-      function hideItFunction() {
+      function hideItFunction(e) {
+        e.preventDefault();
         for (i = 0; i < popupLightboxCloser.length; i++) {
           popupLightboxCloser[i].style.display = "none";
         }

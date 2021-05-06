@@ -44,7 +44,7 @@
     border-radius: 50%;
     font-size: 20px;
     line-height: 27px;
-    font-weight: bold;
+    font-weight: 100;
     text-decoration: none;
     font-family: Tahoma, Verdana, sans-serif;
     display: block;
@@ -163,7 +163,7 @@
       border-radius: 50%;
       font-size: 20px;
       line-height: 27px;
-      font-weight: bold;
+      font-weight: 100;
       text-decoration: none;
       font-family: Tahoma, Verdana, sans-serif;
       display: block;
@@ -406,7 +406,8 @@
       for (var i = 0; i < backdrop.length; i++) {
         backdrop[i].addEventListener("click", hideItFunction, false);
       }
-      function hideItFunction() {
+      function hideItFunction(e) {
+        e.preventDefault();
         for (i = 0; i < popupLightbox.length; i++) {
           popupLightbox[i].style.display = "none";
         }
