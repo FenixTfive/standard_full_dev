@@ -1,3 +1,7 @@
+<link
+  href="https://fonts.googleapis.com/css?family=Open+Sans:400,800&display=swap"
+  rel="stylesheet"
+/>
 <style type="text/css">
   .rkd-000-lightbox-overlay {
     position: fixed;
@@ -9,16 +13,7 @@
     /* //background: rgba(0,0,0,.6) url(https://s3.amazonaws.com/images.rkd.io/common/overlay-trans.png) scroll repeat 0 0; */
     background-color: rgba(0, 0, 0, 0.6);
   }
-  .rkd-000-mobile-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1010000;
-    width: 100%;
-    height: 100%;
-    /* //background: rgba(0,0,0,.6) url(https://s3.amazonaws.com/images.rkd.io/common/overlay-trans.png) scroll repeat 0 0; */
-    background-color: rgba(0, 0, 0, 0.6);
-  }
+
   .rkd-000-popup {
     margin: 0 auto;
     position: fixed;
@@ -100,7 +95,7 @@
   }
   #rkd-000-dollar {
     left: 0px;
-    line-height: 26px;
+    line-height: 25px;
     font-size: 18px;
   }
   .rkd-000-amount > span,
@@ -121,24 +116,14 @@
   }
   /* End manage the meals input */
 
-  @media screen and (min-width: 601px) {
-    .rkd-000-popup .rkd-000-close-button {
-      top: -36px;
-      margin: 0;
-      opacity: 1;
-      position: absolute;
-      right: -11px;
-    }
-  }
-
   @media (max-width: 600px) {
     .rkd-000-popup {
       width: 90%;
     }
     .rkd-000-desktop-lb,
     .rkd-000-desk-content,
-    .rkd-000-countdown-desktop,
-    .rkd-000-desktop-overlay {
+    .rkd-000-countdown-desktop
+    /*.rkd-000-desktop-overlay*/ {
       display: none !important;
     }
     .rkd-000-mobile-lb,
@@ -181,7 +166,7 @@
     }
     #rkd-000-dollar {
       left: 0px;
-      line-height: 24px;
+      line-height: 25px;
       font-size: 18px;
     }
     .rkd-000-amount {
@@ -213,12 +198,12 @@
     //replace CLIENT and TITLE in lowercase
     var cookieName = "lb_CLIENT_2021_TITLE";
     var previewMode = true;
-    var previewType = "session"; //always: display always the LB --  session: Display the LB per session storage -- standard: Display de LB per day, hours, minutes
+    var previewType = "standard"; //always: display always the LB --  session: Display the LB per session storage -- standard: Display de LB per day, hours, minutes
     var timeVal = 1; //applies with standard
-    var desktopOnly = false;
-    var timerMode = false;
-    var DynamicFieldAndButton = true; //if "false", the option form learn more and donate now will be available
-    var mealsUrlParam = "&&chosen"; // some use &set.DonationAmount
+    var desktopOnly = false; //applies with standard (time for per user)
+    var timerMode = false; //disable mobile views
+    var DynamicFieldAndButton = false; //if "false", the option form learn more and donate now will be available
+    var mealsUrlParam = "&chosen"; // some use &set.DonationAmount
 
     //Create cookies function
     function createCookie(name, value, days) {
@@ -308,7 +293,7 @@
         DynamicFieldAndButton &&
           userItem.setAttribute("style", "display:block");
       });
-      //---------show -hide resources link or meals dynamic field
+      //---------end show -hide resources link or meals dynamic field
     }
 
     lightboxHandler(previewMode, previewType, cookieName, timeVal);
@@ -317,9 +302,12 @@
     //Remove the lightbox when escape key is press
     document.addEventListener("keyup", function (e) {
       if (e.which == 27) {
-        document.querySelector(
-          ".rkd-000-desktop-lb,.rkd-000-desktop-overlay,.rkd-000-mobile-lb,.rkd-000-mobile-overlay"
-        ).style.display = "none";
+        document.querySelector(".rkd-000-lightbox-overlay").style.display =
+          "none";
+        document.querySelector(".rkd-000-popup").style.display = "none";
+        document.querySelector(".rkd-000-mobile-lb").style.display = "none";
+        document.querySelector(".rkd-000-mobile-overlay").style.display =
+          "none";
       }
     });
 
@@ -327,14 +315,16 @@
     function showLightBox() {
       //-----------------visual information
       var mobileImage =
-          "https://s3.amazonaws.com/xtemp19.lb/FCENC/201030-FCENC-14211-12-Dec-2020-HolidayMeals-lightbox-v03.jpg",
+          // "https://s3.amazonaws.com/xtemp19.lb/FCENC/201030-FCENC-14211-12-Dec-2020-HolidayMeals-lightbox-v03.jpg",
+          "https://s3.amazonaws.com/xtemp19.lb/XWYRO/210317-XWYRO-Re-brand-Lightbox-v4.gif",
         desktopimage =
-          "https://s3.amazonaws.com/xtemp19.lb/FCENC/201030-FCENC-14211-12-Dec-2020-HolidayMeals-lightbox-v03.jpg",
+          // "https://s3.amazonaws.com/xtemp19.lb/FCENC/201030-FCENC-14211-12-Dec-2020-HolidayMeals-lightbox-v03.jpg",
+          "https://s3.amazonaws.com/xtemp19.lb/XWYRO/210317-XWYRO-Re-brand-Lightbox-v4.gif",
         donateLink =
-          "http://secure.foodbankcenc.org/site/Donation2?12264.donation=form1&df_id=12264&mfc_pref=T&multiply=10&s_src=lightbox",
+          "http://www.foodbankcenc.org/site/Donation2?df_id=11323&mfc_pref=T&11323.donation=form1",
         mobileUrlLink = "",
         timerImage = "https://img1.niftyimages.com/s31/s8yo/-f5d",
-        resourcesLink = "";
+        resourcesLink = "https://wyomingfoodbank.org/rebrand";
 
       var popup =
         '<div class="rkd-000-popup rkd-000-desktop-lb"><div class="rkd-000-content"><a class="rkd-000-resources-link" href="' +
@@ -351,7 +341,7 @@
         '"></a><img src="' +
         desktopimage +
         '" class="rkd-000-mobile-content"/><div class="rkd-000-amount"><span id="rkd-000-dollar">$</span><input class="rkd-000-amount-val-triple" type="text" maxlength="6" value="100"></div><a class="rkd-000-donate-now" href="' +
-        (donateLink || mobileUrlLink) +
+        (mobileUrlLink || donateLink) +
         '"></a><img src="' +
         timerImage +
         '" class="rkd-000-countdown-mobile"/></a></div><div><a href="#" class="rkd-000-close-button">x</a></div></div><div class="rkd-000-lightbox-overlay rkd-000-mobile-overlay"></div>';
@@ -361,7 +351,8 @@
       i.id = "lightboxAppend";
 
       //Append to the body
-      document.getElementsByTagName("body")[0].appendChild(i);
+      document.getElementsByTagName("body")[0].appendChild(i); //---> puts data inside an element at the last index; while.
+      // document.getElementsByTagName("body")[0].prepend(i); //---> needs to be set to be the first element for screen readers
 
       //Set the html of the new div to be our lightbox
       i.innerHTML = popup;
@@ -371,8 +362,7 @@
       //Grab the dark overlay and lightbox from the dom
       var overlay = document.querySelector(".rkd-000-lightbox-overlay");
       var popupLightbox = document.querySelector(".rkd-000-popup");
-      var overlayMobile = document.querySelector(".rkd-000-mobile-overlay");
-      var popupLightboxMobile = document.querySelector(".rkd-000-mobile-lb");
+      var popupLightboxCloser = document.querySelectorAll(".rkd-000-popup");
       var backdrop = document.querySelectorAll(".rkd-000-lightbox-overlay");
 
       var mealsVal = document.querySelector(".rkd-000-amount-val-triple");
@@ -381,41 +371,34 @@
       overlay.style.display = "block";
       popupLightbox.style.display = "block";
 
-      //Remove the lightbox when the close button is clicked
+      //Remove the lightbox when the desktop close button is clicked
       document
-        .querySelector(".rkd-000-popup .rkd-000-close-button ")
+        .querySelector(".rkd-000-close-button")
         .addEventListener("click", function (e) {
           e.preventDefault();
-          overlay.style.display = "none";
-          popupLightbox.style.display = "none";
-          overlayMobile.style.display = "none";
-          popupLightboxMobile.style.display = "none";
+          hideItFunction();
         });
-      //Remove the lightbox when the close button on mobile is clicked
+      //Remove the lightbox when the mobile close button is clicked
       document
-        .querySelector(".rkd-000-mobile-lb .rkd-000-close-button ")
+        .querySelector(".rkd-000-mobile-lb .rkd-000-close-button")
         .addEventListener("click", function (e) {
           e.preventDefault();
-          overlay.style.display = "none";
-          popupLightbox.style.display = "none";
-          overlayMobile.style.display = "none";
-          popupLightboxMobile.style.display = "none";
+          hideItFunction();
         });
 
       //Remove the lightbox when the overlay is clicked
       for (var i = 0; i < backdrop.length; i++) {
         backdrop[i].addEventListener("click", hideItFunction, false);
       }
-      function hideItFunction(e) {
-        e.preventDefault();
-        for (i = 0; i < popupLightbox.length; i++) {
-          popupLightbox[i].style.display = "none";
+      function hideItFunction() {
+        for (i = 0; i < popupLightboxCloser.length; i++) {
+          popupLightboxCloser[i].style.display = "none";
         }
         for (i = 0; i < backdrop.length; i++) {
           backdrop[i].style.display = "none";
         }
       }
-      // //-------End showing and closing lighbox-----------
+      //-------End showing and closing lighbox-----------
 
       //----------------meals handler-----------
       DynamicFieldAndButton &&

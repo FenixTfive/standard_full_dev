@@ -1,0 +1,5 @@
+Download -> 1clickVPN
+give "1clickVPN" VPN access to "cognito mode"
+test the LB 
+
+//the postal code "20149" and name "Ashburn" are the default zip code and city provide by the vpn 1clickVPN

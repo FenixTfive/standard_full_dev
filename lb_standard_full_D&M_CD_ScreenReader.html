@@ -3,17 +3,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 1010000;
-    width: 100%;
-    height: 100%;
-    /* //background: rgba(0,0,0,.6) url(https://s3.amazonaws.com/images.rkd.io/common/overlay-trans.png) scroll repeat 0 0; */
-    background-color: rgba(0, 0, 0, 0.6);
-  }
-  .rkd-000-mobile-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1010000;
+    z-index: 10100;
     width: 100%;
     height: 100%;
     /* //background: rgba(0,0,0,.6) url(https://s3.amazonaws.com/images.rkd.io/common/overlay-trans.png) scroll repeat 0 0; */
@@ -25,7 +15,7 @@
     top: 10%;
     left: 0.1%;
     right: 0.1%;
-    z-index: 1011000;
+    z-index: 10110;
     width: 100%;
     max-width: 600px;
   }
@@ -70,24 +60,14 @@
     display: none;
   }
 
-  @media screen and (min-width: 601px) {
-    .rkd-000-popup .rkd-000-close-button {
-      top: -36px;
-      margin: 0;
-      opacity: 1;
-      position: absolute;
-      right: -11px;
-    }
-  }
-
   @media (max-width: 600px) {
     .rkd-000-popup {
       width: 90%;
     }
     .rkd-000-desktop-lb,
     .rkd-000-desk-content,
-    .rkd-000-countdown-desktop,
-    .rkd-000-desktop-overlay {
+    .rkd-000-countdown-desktop
+    /*.rkd-000-desktop-overlay*/ {
       display: none !important ;
     }
     .rkd-000-mobile-lb,
@@ -136,10 +116,10 @@
     //replace CLIENT and TITLE in lowercase
     var cookieName = "lb_CLIENT_2021_TITLE";
     var previewMode = true;
-    var previewType = "session"; //always: display always the LB --  session: Display the LB per session storage -- standard: Display de LB per day, hours, minutes
-    var timeVal = 1; //applies with standard
-    var desktopOnly = false;
-    var timer = true;
+    var previewType = "standard"; //always: display always the LB --  session: Display the LB per session storage -- standard: Display de LB per day, hours, minutes
+    var timeVal = 1; //applies with standard (time for per user)
+    var desktopOnly = false; //disable mobile views
+    var timer = false; //display or hide the timer
 
     //Create cookies function
     function createCookie(name, value, days) {
@@ -163,7 +143,7 @@
             showLightBox(); //display the LB always
             break;
           case "session":
-            // analized if a session coolie exist
+            // analized if a session cookie exist
             var isNewSession = sessionStorage.getItem(cookieName)
               ? false
               : true;
@@ -196,12 +176,14 @@
       }
     }
 
-    //timer handler
+    //timer and desktop views handler
     function cssHandler(desktopOnly, timerMode) {
-      // timer handler
+      //desktop timer handler-----------
       document.querySelector(
         ".rkd-000-countdown-desktop"
       ).style.display = !timerMode ? "none" : "block";
+      // ------desktop timer handler
+      //show - hide mobile content including timer--------------
       if (!desktopOnly) {
         document.querySelector(
           ".rkd-000-countdown-mobile"
@@ -212,6 +194,7 @@
         var mobileOverlay = document.querySelector(".rkd-000-mobile-overlay");
         mobileOverlay.setAttribute("style", "display:none !important");
       }
+      //------------------show - hide mobile content including timer
     }
 
     lightboxHandler(previewMode, previewType, cookieName, timeVal);
@@ -220,9 +203,12 @@
     //Remove the lightbox when escape key is press
     document.addEventListener("keyup", function (e) {
       if (e.which == 27) {
-        document.querySelector(
-          ".rkd-000-desktop-lb,.rkd-000-desktop-overlay,.rkd-000-mobile-lb,.rkd-000-mobile-overlay"
-        ).style.display = "none";
+        document.querySelector(".rkd-000-lightbox-overlay").style.display =
+          "none";
+        document.querySelector(".rkd-000-popup").style.display = "none";
+        document.querySelector(".rkd-000-mobile-lb").style.display = "none";
+        document.querySelector(".rkd-000-mobile-overlay").style.display =
+          "none";
       }
     });
 
@@ -234,7 +220,7 @@
         desktopimage =
           "https://s3.amazonaws.com/xtemp19.lb/XFBRO/XFBRO-14199-Annual-Fund-Match-Lightbox-v02-(1).jpg",
         urlDF =
-          "https://secure.foodbankrockies.org/site/Donation2;jsessionid=00000000.app30130a?df_id=6968&amp;mfc_pref=T&amp;6968.donation=form1&amp;s_src=lb&amp;_ga=2.40344738.1288742376.1617079713-1714861086.1617079713",
+          "http://www.foodbankcenc.org/site/Donation2?df_id=11323&mfc_pref=T&11323.donation=form1",
         mobileUrlLink = "",
         timerImage = "https://img1.niftyimages.com/s31/s8yo/-f5d";
       //---------------------Screen reader variables
@@ -246,7 +232,7 @@
       var desktopId = "desktopLearnMore",
         mobileId = "mobileLearnMore",
         descriptionText =
-          "Become an ally for veteran empowerment and provide support that veterans and their families can count on. Learn more";
+          "Make 2x the difference. Your gift doubles to help twice as many neighbors in need!. Give now";
 
       var popup =
         '<div class="rkd-000-popup rkd-000-desktop-lb"><div class="rkd-000-content"><a describedby="' +
@@ -261,11 +247,11 @@
         descriptionText +
         '"/><img src="' +
         timerImage +
-        '" class="rkd-000-countdown-desktop"/></a></div><div><a href="#" class="rkd-000-close-button">x</a></div></div><div class="rkd-000-lightbox-overlay rkd-000-desktop-overlay"></div>' +
+        '" class="rkd-000-countdown-desktop"/></a></div><div><a href="#" class="rkd-000-close-button" aria-label="close button">x</a></div></div><div class="rkd-000-lightbox-overlay rkd-000-desktop-overlay"></div>' +
         '<div class="rkd-000-popup rkd-000-mobile-lb"><div class="rkd-000-content"><a  describedby="' +
         mobileId +
         '" class="rkd-000-donate-now" href="' +
-        (urlDF || mobileUrlLink) +
+        (mobileUrlLink || urlDF) +
         '"><img src="' +
         mobileImage +
         '" class="rkd-000-mobile-content" id="' +
@@ -274,14 +260,15 @@
         descriptionText +
         '"/><img src="' +
         timerImage +
-        '" class="rkd-000-countdown-mobile"/></a></div><div><a href="#" class="rkd-000-close-button">x</a></div></div><div class="rkd-000-lightbox-overlay rkd-000-mobile-overlay"></div>';
+        '" class="rkd-000-countdown-mobile"/></a></div><div><a href="#" class="rkd-000-close-button" aria-label="close button">x</a></div></div><div class="rkd-000-lightbox-overlay rkd-000-mobile-overlay"></div>';
 
       //Create a new holder div for the lightbox
       var i = document.createElement("DIV");
       i.id = "lightboxAppend";
 
       //Append to the body
-      document.getElementsByTagName("body")[0].appendChild(i);
+      // document.getElementsByTagName("body")[0].appendChild(i);  //---> puts data inside an element at the last index; while.
+      document.getElementsByTagName("body")[0].prepend(i); //---> needs to be set to be the first element for screen readers
 
       //Set the html of the new div to be our lightbox
       i.innerHTML = popup;
@@ -296,6 +283,13 @@
       overlay.style.display = "block";
       popupLightbox.style.display = "block";
 
+      //Prevent default when close button is clicked
+      document
+        .querySelector(".rkd-000-popup .rkd-000-close-button")
+        .addEventListener("click", function (e) {
+          e.preventDefault();
+        });
+
       //Remove the lightbox when the close button is clicked
       for (var i = 0; i < popupLightboxCloser.length; i++) {
         popupLightboxCloser[i].addEventListener("click", hideItFunction, false);
@@ -305,8 +299,7 @@
       for (var i = 0; i < backdrop.length; i++) {
         backdrop[i].addEventListener("click", hideItFunction, false);
       }
-      function hideItFunction(e) {
-        e.preventDefault();
+      function hideItFunction() {
         for (i = 0; i < popupLightboxCloser.length; i++) {
           popupLightboxCloser[i].style.display = "none";
         }
@@ -314,32 +307,33 @@
           backdrop[i].style.display = "none";
         }
       }
+      //------------------GA Management-----------------
+      //Push Data Event to Google Analytics on Click
+      if (document.querySelector(".rkd-000-popup .rkd-000-donate-now")) {
+        var allDonateButtons = document.body.querySelectorAll(
+          ".rkd-000-popup .rkd-000-donate-now"
+        );
 
-      // //Push Data Event to Google Analytics on Click
-      // if (document.querySelector(".rkd-000-popup .rkd-000-donate-now")) {
-      //   var allDonateButtons = document.body.querySelectorAll(
-      //     ".rkd-000-popup .rkd-000-donate-now"
-      //   );
+        for (var x = 0; x < allDonateButtons.length; x++) {
+          allDonateButtons[x].addEventListener("click", function () {
+            window.dataLayer.push({
+              event: "dynamicEvent",
+              dynamicCategory: "lightbox",
+              dynamicAction: "click",
+              dynamicLabel: cookieName,
+            });
+          });
+        }
+      }
 
-      //   for (var x = 0; x < allDonateButtons.length; x++) {
-      //     allDonateButtons[x].addEventListener("click", function () {
-      //       window.dataLayer.push({
-      //         event: "dynamicEvent",
-      //         dynamicCategory: "lightbox",
-      //         dynamicAction: "click",
-      //         dynamicLabel: cookieName,
-      //       });
-      //     });
-      //   }
-      // }
-
-      // //Push Data Event to Google Analytics on Render
-      // window.dataLayer.push({
-      //   event: "dynamicEvent",
-      //   dynamicCategory: "lightbox",
-      //   dynamicAction: "render",
-      //   dynamicLabel: cookieName,
-      // });
+      //Push Data Event to Google Analytics on Render
+      window.dataLayer.push({
+        event: "dynamicEvent",
+        dynamicCategory: "lightbox",
+        dynamicAction: "render",
+        dynamicLabel: cookieName,
+      });
+      //------------------End GA Management-----------------
     }
   })();
 </script>

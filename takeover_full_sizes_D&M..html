@@ -19,7 +19,7 @@
     right: 0.5%;
     left: 0.5%;
     width: 100%;
-    max-width: 1600px;
+    max-width: 100%;
     height: 100%;
     margin: 0 auto;
     font-size: 0;
@@ -42,11 +42,12 @@
 
   .rkd-TAKEOVER-000-close-header a.rkd-TAKEOVER-000-close-btn {
     display: block;
-    font-size: 16px;
+    font-size: 22px;
     line-height: 3.6em;
     color: #fff;
     padding: 0 12%;
     background-color: var(--main-header-color);
+    z-index: 1025000000;
   }
 
   .rkd-TAKEOVER-000-content {
@@ -65,21 +66,13 @@
 
   .rkd-TAKEOVER-000-desk-content {
     display: block;
-    width: 100%;
-    height: auto;
+    width: 100vw;
+    height: 90vh;
     margin: 0 auto;
     box-shadow: none;
   }
-
   .rkd-TAKEOVER-000-mobile-lb {
     display: none;
-  }
-
-  .rkd-TAKEOVER-000-timer {
-    position: absolute;
-    top: 0%;
-    left: 0%;
-    width: 40%;
   }
   @media screen and (max-width: 1024px) {
     .rkd-TAKEOVER-000-popup {
@@ -108,116 +101,38 @@
     .rkd-TAKEOVER-000-mobile-overlay {
       display: block;
     }
-    /* .rkd-TAKEOVER-000-timer {
-    position: absolute;
-    top: 0%;
-    left: 0%;
-    width: 40%;
-  } */
   }
   @media screen and (max-width: 768px) {
-    .rkd-TAKEOVER-000-popup {
-      width: 100%;
-    }
-    .rkd-TAKEOVER-000-mobile-content {
-      width: 100%;
-      height: 90%;
-    }
     .rkd-TAKEOVER-000-close-header a.rkd-TAKEOVER-000-mobile-close-btn {
-      display: block;
       font-size: 28px;
-      line-height: 3.6em;
-      color: #fff;
-      padding: 0 12%;
-      text-align: center;
     }
-    /* .rkd-TAKEOVER-000-timer {
-    position: absolute;
-    top: 0%;
-    left: 0%;
-    width: 40%;
-  } */
   }
   @media screen and (max-width: 600px) {
-    .rkd-TAKEOVER-000-popup {
-      width: 100%;
-    }
-    .rkd-TAKEOVER-000-mobile-content {
-      width: 100%;
-      height: 90%;
-    }
     .rkd-TAKEOVER-000-close-header a.rkd-TAKEOVER-000-mobile-close-btn {
-      display: block;
       font-size: 20px;
-      line-height: 3.6em;
-      color: #fff;
-      padding: 0 12%;
-      text-align: center;
     }
-    /* .rkd-TAKEOVER-000-timer {
-    position: absolute;
-    top: 0%;
-    left: 0%;
-    width: 40%;
-  } */
   }
   @media screen and (max-width: 410px) {
-    .rkd-TAKEOVER-000-popup {
-      width: 100%;
-    }
-    .rkd-TAKEOVER-000-mobile-content {
-      width: 100%;
-      height: 90%;
-    }
     .rkd-TAKEOVER-000-close-header a.rkd-TAKEOVER-000-mobile-close-btn {
-      display: block;
       font-size: 16px;
-      line-height: 3.6em;
-      color: #fff;
-      padding: 0 12%;
-      text-align: center;
     }
-    /* .rkd-TAKEOVER-000-timer {
-    position: absolute;
-    top: 0%;
-    left: 0%;
-    width: 40%;
-  } */
   }
   /* galaxy fold */
   @media screen and (max-width: 280px) {
-    .rkd-TAKEOVER-000-popup {
-      width: 100%;
-    }
-    .rkd-TAKEOVER-000-mobile-content {
-      width: 100%;
-      height: 90%;
-    }
     .rkd-TAKEOVER-000-close-header a.rkd-TAKEOVER-000-mobile-close-btn {
-      display: block;
       font-size: 15px;
-      line-height: 3.6em;
-      color: #fff;
-      padding: 0 12%;
-      text-align: center;
     }
-    /* .rkd-TAKEOVER-000-timer {
-    position: absolute;
-    top: 0%;
-    left: 0%;
-    width: 40%;
-  } */
   }
 </style>
 
 <script type="text/javascript">
   (function () {
-    //replace CLIENT and TITLE in lowercase
     var cookieName = "lb_CLIENT_2021_TITLE_takeover";
     var previewMode = true;
     var previewType = "session"; //always: display always the LB --  session: Display the LB per session storage -- standard: Display de LB per day, hours, minutes
     var timeVal = 1; //applies with standard
     var desktopOnly = false;
+
     // Create cookies function
     function createCookie(name, value, days) {
       var date, expires;
@@ -297,9 +212,8 @@
         mobileImage =
           "https://s3.amazonaws.com/xtemp19.lb/XNOLA/210305-XNOLA-Entergy-Match-HP-Takeover-Mobile-v4.jpg",
         urlLink =
-          "https://secure.foodbankrockies.org/site/Donation2;jsessionid=00000000.app30130a?df_id=6968&amp;mfc_pref=T&amp;6968.donation=form1&amp;s_src=lb&amp;_ga=2.40344738.1288742376.1617079713-1714861086.1617079713",
+          "http://www.foodbankcenc.org/site/Donation2?df_id=11323&mfc_pref=T&11323.donation=form1",
         mobileUrlLink = "",
-        timer = "https://img1.niftyimages.com/s31/s8yo/-f5d",
         continueName = "no-hunger.org";
       //---------------------Screen reader variables
       //    (1) the tags <img> which contains the hero and description must have an ID an a ALT with the text that is on the image
@@ -321,27 +235,24 @@
         urlLink +
         '"><img src="' +
         desktopImage +
-        '" class="rkd-TAKEOVER-000-desk-content"><img src="' +
-        timer +
-        '" class="rkd-TAKEOVER-000-timer"></a></div></div></div><div class="rkd-TAKEOVER-000-lightbox-overlay rkd-TAKEOVER-000-desktop-overlay"></div>"' +
+        '" class="rkd-TAKEOVER-000-desk-content"></a></div></div></div><div class="rkd-TAKEOVER-000-lightbox-overlay rkd-TAKEOVER-000-desktop-overlay"></div>"' +
         '"<div class="rkd-TAKEOVER-000-popup rkd-TAKEOVER-000-mobile-lb"><div class="rkd-TAKEOVER-000-close-header"><a href="#" class="rkd-TAKEOVER-000-mobile-close-btn">Continue to <strong>' +
         continueName +
         ' &raquo;</strong></a></div><a describedby="' +
         mobileId +
         '" class="rkd-TAKEOVER-000-donate-now" href="' +
-        (urlLink || mobileUrlLink) +
+        (mobileUrlLink || urlLink) +
         '"><img src="' +
         mobileImage +
-        '" class="rkd-TAKEOVER-000-mobile-content"/><img src="' +
-        timer +
-        '" class="rkd-TAKEOVER-000-timer"></a></div></div></div><div class="rkd-TAKEOVER-000-lightbox-overlay rkd-TAKEOVER-000-mobile-overlay"></div>';
+        '" class="rkd-TAKEOVER-000-mobile-content"/></a></div></div></div><div class="rkd-TAKEOVER-000-lightbox-overlay rkd-TAKEOVER-000-mobile-overlay"></div>';
 
       // Create a new holder div for the lightbox
       var i = document.createElement("DIV");
       i.id = "lightboxAppend";
 
-      // Append to the body
-      document.getElementsByTagName("body")[0].appendChild(i);
+      //Append to the body
+      // document.getElementsByTagName("body")[0].appendChild(i);  //---> puts data inside an element at the last index; while.
+      document.getElementsByTagName("body")[0].prepend(i); //---> needs to be set to be the first element for screen readers
 
       // Set the html of the new div to be our lightbox
       i.innerHTML = popup;
@@ -362,6 +273,13 @@
       overlay.style.display = "block";
       popupLightbox.style.display = "block";
 
+      //Prevent default when close button is clicked
+      document
+        .querySelector(".rkd-TAKEOVER-000-popup .rkd-TAKEOVER-000-close-btn")
+        .addEventListener("click", function (e) {
+          e.preventDefault();
+        });
+
       //Remove the lightbox when the close button is clicked
       for (var i = 0; i < popupLightboxCloser.length; i++) {
         popupLightboxCloser[i].addEventListener("click", hideItFunction, false);
@@ -371,8 +289,7 @@
       for (var i = 0; i < backdrop.length; i++) {
         backdrop[i].addEventListener("click", hideItFunction, false);
       }
-      function hideItFunction(e) {
-        e.preventDefault();
+      function hideItFunction() {
         for (i = 0; i < popupLightboxCloser.length; i++) {
           popupLightboxCloser[i].style.display = "none";
         }

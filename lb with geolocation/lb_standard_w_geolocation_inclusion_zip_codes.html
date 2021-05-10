@@ -1,0 +1,254 @@
+<style type="text/css">
+  .rkd-000-lightbox-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10200;
+    width: 100%;
+    height: 100%;
+    /*background: rgba(0,0,0,.9) url('https://s3.amazonaws.com/images.rkd-000.io/common/overlay-trans.png') scroll repeat 0 0;*/
+    background-color: rgba(0, 0, 0, 0.9);
+  }
+  .rkd-000-popup {
+    margin: 0 auto;
+    position: fixed;
+    top: 10%;
+    left: 0.1%;
+    right: 0.1%;
+    z-index: 10250;
+    width: 100%;
+    max-width: 600px;
+  }
+  .rkd-000-desk-content {
+    width: 100%;
+    box-shadow: 0px 0px 30px #000000;
+  }
+  .rkd-000-popup .rkd-000-close-button {
+    margin: 0;
+    opacity: 1;
+    position: absolute;
+    right: -7px;
+    top: -30px;
+    text-align: center;
+    border-radius: 50%;
+    font-size: 20px;
+    line-height: 27px;
+    font-weight: bold;
+    text-decoration: none;
+    font-family: Tahoma, Verdana, sans-serif;
+    display: block;
+    width: 28px;
+    height: 28px;
+    /*background-color: #084c66;*/
+    color: #fff;
+  }
+  a.rkd-000-donate-now {
+    border-bottom: none !important;
+    /* outline: 0px !important; in case the LB has outline*/
+    /* in case the Image is small
+         width: 100%;
+          left:0% */
+  }
+  @media (max-width: 600px) {
+    .rkd-000-popup {
+      width: 90%;
+    }
+    /* .rkd-000-popup,
+        .rkd-000-lightbox-overlay,
+        .rkd-000-desk-content,
+        .rkd-000-close-button {
+          display: none !important;
+        } */
+  }
+</style>
+<script type="text/javascript">
+  (function ($) {
+    //replace CLIENT and TITLE in lowercase
+    var cookieName = "lb_CLIENT_2021_TITLE";
+    var previewMode = true;
+
+    //Insert your zip Codes and match them to your condtions such as Country, city, postal code, etc. !EVERYTHING MUST BE STRING TYPE¡
+    var zipOject = {
+      // "70001": "Jefferson Parish",
+      // "70002": "Jefferson Parish",
+      // "70003": "Jefferson Parish",
+      // "70004": "Jefferson Parish",
+      // "70005": "Jefferson Parish",
+      // "70006": "Jefferson Parish",
+    };
+
+    //Create cookies function
+    function createCookie(name, value, days) {
+      var date, expires;
+      if (days) {
+        date = new Date();
+        date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+        expires = "; expires=" + date.toGMTString();
+      } else {
+        expires = "";
+      }
+      document.cookie = name + "=" + value + expires + "; path=/";
+    }
+    // //load maxMind data and lightbox
+    $(document).ready(function () {
+      // get maxmind info base on our current position
+      fetch("https://maxmind-cache.dmc.systems/get-data?cl=XNOLA")
+        .then(function (response) {
+          // The API call was successful!
+          return response.json();
+        })
+        .then(function (data) {
+          //init variables for later comparation | uniqueLocation= name of the location to include , postalCode= postal code which match with the uniqueLocation
+          var uniqueLocation = "All Other Areas";
+          var postalCode = data.postal.code;
+
+          //--------------------- (FOR TESTING)
+          // This is the JSON from our response
+          // console.log("maxmindData: ", data);
+          console.log("current zipCode: ", postalCode);
+          //--------------------- END TESTING
+
+          //Variable to add the cookie name to the test url
+          var testingUrl = new RegExp(cookieName);
+
+          //Show the lightbox in preview mode
+          if (previewMode === true && window.location.href.match(testingUrl)) {
+            console.log("access 1 - Testing URL Matched - preview");
+
+            //the postal code "20149" and name "Ashburn" are the default zip code and city provide by the vpn 1clickVPN
+            if (postalCode === "20149" && data.city.names.en === "Ashburn") {
+              console.log("access 2 - LB displayed - preview");
+              uniqueLocation = "Ashburn";
+              showLightBox();
+            } else {
+              console.log("access 3 - No coincidences - preview");
+              return;
+            }
+          }
+
+          //Lightbox in live mode
+          if (previewMode == false) {
+            //review if the LB was displayed before
+            if (document.cookie.indexOf(cookieName) !== -1) {
+              return;
+            }
+            //create the cookie and show the lightbox
+            createCookie(cookieName, "true", 1 / 6);
+            console.log("access 1 - Testing URL Matched - live");
+            //change the names for the new ones
+            if (
+              zipOject[postalCode] == "Lafourche Parish" ||
+              zipOject[postalCode] == "Orleans Parish" ||
+              zipOject[postalCode] == "Plaquemines Parish" ||
+              zipOject[postalCode] == "St Bernard Parish" ||
+              zipOject[postalCode] == "St Charles Parish" ||
+              zipOject[postalCode] == "St John The Baptist Parish" ||
+              zipOject[postalCode] == "St Tammany Parish" ||
+              zipOject[postalCode] == "Tangipahoa Parish" ||
+              zipOject[postalCode] == "Terrebonne Parish" ||
+              zipOject[postalCode] == "Washington Parish"
+            ) {
+              console.log("access 2 - LB displayed - live");
+              uniqueLocation = zipOject[postalCode];
+              showLightBox();
+            } else {
+              console.log("access 3 - No coincidences - live");
+              return;
+            }
+          }
+
+          //Remove the lightbox when escape key is press
+          document.addEventListener("keyup", function (e) {
+            if (e.which == 27) {
+              document.querySelector(
+                ".rkd-000-lightbox-overlay"
+              ).style.display = "none";
+              document.querySelector(".rkd-000-popup").style.display = "none";
+            }
+          });
+
+          //Function to show the lightbox
+          function showLightBox() {
+            var linkURL = "",
+              image = "";
+
+            var popup =
+              '<div class="rkd-000-popup"><div class="rkd-000-content"><a class="rkd-000-donate-now" href="' +
+              linkURL +
+              '" ><img src="' +
+              image +
+              '" class="rkd-000-desk-content" /></a></div><div class="rkd-000-closing-footer"><a href="#" class="rkd-000-close-button">&times;</a></div></div><div class="rkd-000-lightbox-overlay"></div>';
+
+            //Create a new holder div for the lightbox
+            var i = document.createElement("DIV");
+            i.id = "lightboxAppend";
+
+            //Append to the body
+            document.getElementsByTagName("body")[0].appendChild(i);
+
+            //Set the html of the new div to be our lightbox
+            i.innerHTML = popup;
+
+            //Grab the dark overlay and lightbox from the dom
+            var overlay = document.querySelector(".rkd-000-lightbox-overlay");
+            var popupLightbox = document.querySelector(".rkd-000-popup");
+
+            //Show the lightbox
+            overlay.style.display = "block";
+            popupLightbox.style.display = "block";
+
+            //Remove the lightbox when the close button is clicked
+            document
+              .querySelector(".rkd-000-popup .rkd-000-close-button")
+              .addEventListener("click", function (e) {
+                e.preventDefault();
+                overlay.style.display = "none";
+                popupLightbox.style.display = "none";
+              });
+
+            //Remove the lightbox when the overlay is clicked
+            overlay.addEventListener("click", function () {
+              overlay.style.display = "none";
+              popupLightbox.style.display = "none";
+            });
+
+            //Push Data Event to Google Analytics on Click
+            if (document.querySelector(".rkd-000-popup .rkd-000-donate-now")) {
+              var allDonateButtons = document.body.querySelectorAll(
+                ".rkd-000-popup .rkd-000-donate-now"
+              );
+
+              for (var x = 0; x < allDonateButtons.length; x++) {
+                allDonateButtons[x].addEventListener("click", function () {
+                  window.dataLayer.push({
+                    event: "dynamicEvent",
+                    dynamicCategory: "lightbox",
+                    dynamicAction: "click",
+                    dynamicLabel: cookieName,
+                  });
+                });
+              }
+            }
+
+            //Push Data Event to Google Analytics on Render
+            window.dataLayer.push({
+              event: "dynamicEvent",
+              dynamicCategory: "lightbox",
+              dynamicAction: "render",
+              dynamicLabel: cookieName,
+            });
+            //When page was loaded and the links has a target="_blank"
+            /*setTimeout(function () {
+                      var _donateButtons = document.body.getElementById('.rkd-000-donate-now');
+                      _donateButtons.setAttribute("target", "_self");
+                  }, 500);
+                  */
+          }
+        })
+        .catch(function (err) {
+          // There was an error
+          console.warn("Something went wrong.", err);
+        });
+    });
+  })(jQuery);
+</script>

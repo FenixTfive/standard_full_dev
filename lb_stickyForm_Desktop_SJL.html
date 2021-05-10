@@ -1,0 +1,538 @@
+<style type="text/css">
+  #rkd-000-sticky-wrapper {
+    display: block;
+    position: fixed;
+    top: 10%;
+    right: 23px;
+    height: 585px;
+    font-family: "Lato", sans-serif;
+    color: #ffffff;
+    z-index: 99999999;
+  }
+
+  .rkd-000-sw-email-inner {
+    display: block;
+    background: #1a87bc;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 355px;
+    height: 577px;
+    padding: 0;
+    border-radius: 6px;
+    white-space: normal;
+    opacity: 1;
+  }
+  .rkd-000-img-petition {
+    position: relative;
+    max-width: 100%;
+    height: 130px;
+    border-radius: 10px 10px 0 0;
+    background: url(https://secure2.convio.net/sjlcp/images/content/pagebuilder/190802-SJL-Updated-Novena-Lightbox-Mockup-v7.jpg);
+    background-size: cover;
+    background-position: center;
+  }
+  h3.title {
+    margin: 0;
+    font-size: 13.5px !important;
+    padding: 20px 21px 4px 21px;
+    font: 12px "Trebuchet MS", Geneva, sans-serif;
+    text-align: center;
+    color: #fff;
+  }
+  /* imput color */
+  #stickyFirst,
+  #stickyLast,
+  #stickyEmail,
+  #specialIntention {
+    color: #000 !important;
+  }
+
+  .open .rkd-000-sw-email-inner,
+  .rkd-000-sw-email-inner {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  .open .rkd-000-sw-email-inner {
+    min-height: 300px;
+  }
+
+  .rkd-000-sw-email-inner {
+    min-height: 400px;
+    background-position: center bottom;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+
+  a.toggle-open {
+    display: block;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 60px;
+    height: 60px;
+    text-decoration: none;
+    line-height: 60px;
+    text-align: center;
+    border-radius: 30px;
+    background-color: #ee7321;
+    box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    z-index: 9;
+  }
+
+  a.toggle-open {
+    display: none;
+  }
+
+  a.toggle-open > img {
+    display: block;
+    margin: 0 auto;
+    padding: 10px 0 15px 0;
+  }
+
+  .open a.toggle-open {
+    box-shadow: none;
+  }
+
+  .rkd-000-sw-close-btn {
+    display: block;
+    position: absolute;
+    top: -12px;
+    left: -12px;
+    width: 24px;
+    height: 24px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 50%;
+    background-color: #333;
+    z-index: 8;
+  }
+
+  .rkd-000-sw-form {
+    width: 95%;
+    height: 60%;
+    overflow: hidden;
+    top: 41%;
+    position: absolute;
+    left: 22px;
+  }
+
+  .rkd-000-sw-form {
+    display: none;
+  }
+
+  .rkd-000-sw-form {
+    display: block;
+  }
+
+  .rkd-000-sw-close-btn > img {
+    display: block;
+    width: 14px;
+    height: 14px;
+    margin: 5px;
+  }
+
+  .rkd-000-sw-email-inner h2 {
+    font-size: 24px;
+    font-weight: 900;
+    text-align: left;
+    text-transform: uppercase;
+    color: #fff;
+    margin: 0;
+  }
+
+  .rkd-000-sw-email-inner h2 {
+    text-align: center;
+  }
+
+  .rkd-000-sw-email-inner p {
+    display: inline-block;
+    /*width: 100%;*/
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 22px;
+    text-align: center;
+    margin: 8px 0;
+    padding: 0 34px;
+    white-space: normal;
+  }
+
+  .rkd-000-sw-form form {
+    display: block;
+    white-space: normal;
+  }
+
+  .rkd-000-sw-form form > label {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px;
+    text-transform: uppercase;
+    color: #ffbc9e;
+    margin: 6px 0 0 0;
+  }
+
+  .rkd-000-sw-form form > label > span {
+    font-size: 20px;
+    color: #b30000;
+    vertical-align: top;
+  }
+
+  .rkd-000-sw-form form > input {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    line-height: 20px;
+    color: #333;
+    margin: 6px 0 4px 0;
+    padding: 9px 10px;
+    border: none;
+    background: #ffffff;
+    /*border-radius: 6px;*/
+  }
+
+  .rkd-000-sw-form form > input::placeholder {
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #ccc;
+  }
+
+  .rkd-000-sw-form form > input:focus {
+    outline: #9c4e19 auto 4px;
+  }
+
+  #stickyCaptcha {
+    display: none;
+  }
+
+  #stickyCaptcha > div {
+    margin: 6px 0 4px 0 !important;
+  }
+
+  .rkd-000-form_submit > a {
+    display: block;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 20px;
+    text-decoration: none;
+    text-transform: none;
+    color: #fff;
+    margin: 0px auto;
+    padding: 10px 24px;
+    border-radius: 6px;
+    background-color: #d3ae3b;
+    width: 226px;
+    height: 45px;
+    border-radius: 0px;
+    text-align: center;
+  }
+
+  .rkd-000-form_submit > a:hover {
+    background-color: #d3ae3b;
+  }
+
+  .rkd-000-form_submit > a:focus {
+    outline: none;
+  }
+
+  .rkd-000-form_submit > a.disabled {
+    color: #fff;
+    background-color: #e0ce96;
+    cursor: default;
+  }
+
+  .rkd-000-sw-form form > span {
+    display: none;
+    width: 100%;
+    font-size: 0;
+    font-weight: 900;
+    line-height: 0;
+    color: #750b0b;
+    margin: 0;
+    padding: 0;
+  }
+
+  .rkd-000-sw-form form > span.error {
+    display: inline-block;
+    font-size: 12px;
+    line-height: 16px;
+    margin: 0 0 10px 0;
+    padding-left: 10px;
+  }
+
+  .rc-anchor-normal .rc-anchor-normal-footer .rc-anchor-logo-portrait {
+    margin: 10px 0 0 6px !important;
+  }
+
+  .rc-anchor-normal .rc-anchor-normal-footer .rc-anchor-pt {
+    right: 20px !important;
+  }
+  .rkd-000-form_email > input {
+    border-radius: 0px;
+    width: 100%;
+    margin: 4px 0px;
+  }
+  .rkd-000-form_name > input {
+    width: 100%;
+    display: inline-block;
+    margin: auto;
+    border-radius: 0px;
+    margin: 4px 0px;
+  }
+  .rkd-000-form_name,
+  .rkd-000-form_email,
+  .rkd-000-form_intention,
+  .rkd-000-form_opt {
+    width: 93%;
+    /* margin: 0px 0px 10px 7px; */
+    padding: 0px;
+  }
+  .rkd-000-form_intention textarea {
+    border-radius: 0px;
+    margin: 9px 0px;
+    color: #000;
+  }
+  .error {
+    font-size: 12px;
+    padding: 0px 30px 0px 30px;
+    color: red;
+    font-weight: bold;
+  }
+
+  .rkd-000-form_opt input[type="radio"],
+  .rkd-000-form_opt input[type="checkbox"] {
+    margin: 0px 3px 0px 0px;
+    line-height: unset;
+    display: inline-block;
+    padding: 10px;
+    position: relative;
+    top: -13px;
+  }
+  .rkd-000-form_opt label {
+    display: inline-block;
+    max-width: 93%;
+    font-weight: 100;
+    font-size: 13px;
+    line-height: 18px;
+    margin-bottom: 9px;
+  }
+  @media (max-width: 600px) {
+    #rkd-000-sticky-wrapper {
+      display: none !important;
+    }
+  }
+
+  @-moz-document url-prefix() {
+    h1 {
+      color: red;
+    }
+  }
+</style>
+
+<script>
+  jQuery(document).ready(function ($) {
+    var cookieName = "lbpreview_2021_june_novena";
+    var previewMode = true;
+    var donationFormUrl =
+      "https://forms.shrineofstjude.org/site/Donation2;jsessionid=00000000.app270a?df_id=3201&mfc_pref=T&3201.donation=form1&chosen=25";
+    var submissionUrl = "https://forms.shrineofstjude.org/site/SSurvey";
+    var timeVal = 1;
+
+    function createCookie(name, value, days) {
+      var date, expires;
+
+      if (days) {
+        date = new Date();
+        date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+        expires = "; expires=" + date.toGMTString();
+      } else {
+        expires = "";
+      }
+
+      document.cookie = name + "=" + value + expires + "; path=/";
+    }
+    // Variable to add the cookie name to the test url
+    var testingUrl = new RegExp(cookieName);
+
+    if (previewMode && window.location.href.match(testingUrl)) {
+      appendSignup();
+    }
+    if (previewMode == false) {
+      //review if the LB was displayed before
+      if (document.cookie.indexOf(cookieName) !== -1) {
+        return;
+      }
+      //create the cookie and show the lightbox
+      createCookie(cookieName, "true", timeVal);
+      appendSignup();
+    }
+
+    function appendSignup() {
+      var closeButtonIcon =
+          "https://secure2.convio.net/shfbgn/images/content/pagebuilder/rkd_close_icon.png",
+        title =
+          "Please fill in your petition below and it will be taken to the altar of St. Jude at the National Shrine of St. Jude, where it will be prayed for by the Claretians throughout the Solemn Novena.";
+
+      var signUpForm = $(
+        '<div id="rkd-000-sticky-wrapper"><div id="rkd-000-sticky-content" class="rkd-000-sw-email-inner"><div class="rkd-000-img-petition" ></div><h3 class="title">' +
+          title +
+          '</h3><br><a href="#" class="rkd-000-sw-close-btn"><img src="' +
+          closeButtonIcon +
+          '" /></a><div class="rkd-000-sw-form"><form><div class="rkd-000-form_name"><input type="text" name="stickyFirst" id="stickyFirst" placeholder="* First Name" class="required"><span id="stickyFirst-error" class=""></span><input type="text" name="stickyLast" id="stickyLast" placeholder="* Last Name"><span id="stickyLast-error" class=""></span></div><div class="rkd-000-form_email"><input type="text" name="stickyEmail" id="stickyEmail" placeholder="* Email Address"><span id="stickyEmail-error" class=""></span></div><div class="rkd-000-form_intention"><textarea name="specialIntention" id="specialIntention" placeholder="* Special Intention" cols="50" rows="3"></textarea><span id="specialIntention-error" class=""></span></div><div class="rkd-000-form_opt"><input type="checkbox" name="cons_email_opt_in" id="cons_email_opt_in" checked="checked"><label for="cons_email_opt_in" class="wrapable"><span id="subscribe" class="Explicit">Yes, I would like to receive email from the National Shrine of St. Jude</span></label></div><div class="rkd-000-form_submit"><a href="#" id="btn-submit" class="disabled">Send Your Prayer »</a></div></form></div></div></div>'
+      );
+
+      $("body").append(signUpForm);
+    }
+
+    var mainSticky = $("#rkd-000-sticky-wrapper"),
+      closeBtn = $("a.rkd-000-sw-close-btn"),
+      toggleOpen = $("a.toggle-open"),
+      inputFirst = $("#stickyFirst"),
+      inputLast = $("#stickyLast"),
+      inputEmail = $("#stickyEmail"),
+      inputIntent = $("#specialIntention"),
+      inputCaptcha = $("#stickyCaptcha"),
+      submitBtn = $("#btn-submit");
+
+    //remove the sticky when the close button is clicked
+    closeBtn.on("click", function (e) {
+      e.preventDefault();
+      mainSticky.remove();
+
+      //Push Data Event to Google Analytics on Render
+      window.dataLayer.push({
+        event: "dynamicEvent",
+        dynamicCategory: "lightbox",
+        dynamicAction: "close",
+        dynamicLabel: cookieName,
+      });
+    });
+    //submit data when submit button is clicked
+    submitBtn.on("click", function (e) {
+      e.preventDefault();
+
+      if ($(this).hasClass("disabled")) {
+        return false;
+      }
+
+      if (!validateForm()) {
+        var valEmail = $.trim(inputEmail.val()),
+          valFirst = $.trim(inputFirst.val()),
+          valLast = $.trim(inputLast.val()),
+          valInten = $.trim(inputIntent.val());
+
+        $.ajax({
+          type: "POST",
+          url: submissionUrl,
+          data: {
+            cons_info_component: "t",
+            cons_first_name: valFirst,
+            cons_last_name: valLast,
+            cons_email: valEmail,
+            "1486_6600_2_11701": valInten,
+            cons_mail_opt_in: "t",
+            cons_email_opt_in: "on",
+            cons_email_opt_in_requested: "true",
+            cons_postal_opt_in: "on",
+            cons_postal_opt_in_requested: "true",
+            s_rememberMe: "on",
+            remember_me_opt_in_requested: "true",
+            SURVEY_ID: 6600,
+            ACTION_SUBMIT_SURVEY_RESPONSE: "Send+Your+Prayer+»",
+          },
+          success: function (data, textStatus, jQxhr) {
+            formComplete();
+          },
+          error: function (jqXhr, textStatus, errorThrown) {
+            formComplete();
+          },
+        });
+      }
+    });
+
+    inputEmail.on("keyup", function (e) {
+      var errorEmail = inputEmail.next("span");
+
+      errorEmail.empty().removeClass("error");
+
+      if (!$(this).val().length) {
+        submitBtn.addClass("disabled");
+      } else {
+        submitBtn.removeClass("disabled");
+      }
+    });
+
+    function validateForm() {
+      var regex = /^[a-zA-Z0-9]([a-zA-Z0-9]+[\.\_\-]?)+@([a-zA-Z0-9][a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])(\.[a-zA-Z]{2,14})?(\.[a-zA-Z]{2,14})$/;
+      var valEmail = $.trim(inputEmail.val()),
+        errorEmail = inputEmail.next("span"),
+        valFirst = $.trim(inputFirst.val()),
+        errorFirst = inputFirst.next("span"),
+        valLast = $.trim(inputLast.val()),
+        errorLast = inputLast.next("span"),
+        valInten = $.trim(inputIntent.val()),
+        errorInten = inputIntent.next("span"),
+        errors = 4;
+
+      if (!valEmail.length) {
+        errorEmail.text("Email is a required field").addClass("error");
+      } else {
+        if (regex.test(valEmail)) {
+          errorEmail.empty().removeClass("error");
+          errors--;
+        } else {
+          errorEmail.text("Invalid format").addClass("error");
+        }
+      }
+      if (!valFirst.length) {
+        errorFirst.text("First Name is a required field").addClass("error");
+      } else {
+        errorFirst.empty().removeClass("error");
+        errors--;
+      }
+      if (!valLast.length) {
+        errorLast.text("Last Name is a required field").addClass("error");
+      } else {
+        errorLast.empty().removeClass("error");
+        errors--;
+      }
+      if (!valInten.length) {
+        errorInten
+          .text("Special Intention is a required field")
+          .addClass("error");
+      } else {
+        errorInten.empty().removeClass("error");
+        errors--;
+      }
+
+      return errors;
+    }
+
+    function formComplete() {
+      //Push Data Event to Google Analytics on Render
+      window.dataLayer.push({
+        event: "dynamicEvent",
+        dynamicCategory: "lightbox",
+        dynamicAction: "submit",
+        dynamicLabel: cookieName,
+      });
+
+      // Redirect to Donation Form ID #3160
+      window.location.replace(donationFormUrl);
+    }
+    //Push Data Event to Google Analytics on Render
+    window.dataLayer.push({
+      event: "dynamicEvent",
+      dynamicCategory: "lightbox",
+      dynamicAction: "render",
+      dynamicLabel: cookieName,
+    });
+  });
+</script>
