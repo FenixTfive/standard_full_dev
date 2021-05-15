@@ -136,6 +136,8 @@
     //replace CLIENT and TITLE in lowercase
     var cookieName = "lb_CLIENT_2021_TITLE_takeover";
     var previewMode = true;
+    var previewType = "standard"; //always: display always the LB --  session: Display the LB per session storage -- standard: Display de LB per day, hours, minutes
+    var timeVal = 1; //applies with standard (time for per user)
 
     // Create cookies function
     function createCookie(name, value, days) {
@@ -150,24 +152,48 @@
       document.cookie = name + "=" + value + expires + "; path=/";
     }
 
-    // Variable to add the cookie name to the test url
-    var testingUrl = new RegExp(cookieName);
+    //Handler for live and preview mode
+    function lightboxHandler(previewMode, previewType, cookieName, timeVal) {
+      //Lightbox in live mode
+      if (!previewMode) {
+        switch (previewType) {
+          case "always":
+            showLightBox(); //display the LB always
+            break;
+          case "session":
+            // analized if a session cookie exist
+            var isNewSession = sessionStorage.getItem(cookieName)
+              ? false
+              : true;
+            // Review if the SB was previously displayed
+            if (!isNewSession) {
+              return;
+            }
+            showLightBox(); // Show Lightbox
+            sessionStorage.setItem(cookieName, "displayed"); // Create the session variable
+            console.log("session");
+            break;
 
-    // Show the lightbox in preview mode
-    if (previewMode === true && window.location.href.match(testingUrl)) {
-      showLightBox();
-    }
+          default:
+            //review if the LB was displayed before
+            if (document.cookie.indexOf(cookieName) !== -1) {
+              return;
+            }
 
-    // Lightbox in live mode
-    if (previewMode == false) {
-      // review if the LB was displayed before
-      if (document.cookie.indexOf(cookieName) !== -1) {
-        return;
+            createCookie(cookieName, "true", timeVal); //create the cookie and show the lightbox
+            showLightBox();
+            break;
+        }
+      } else {
+        //Variable to add the cookie name to the test url
+        var testingUrl = new RegExp(cookieName);
+        //Show the lightbox in preview mode
+        if (previewMode === true && window.location.href.match(testingUrl)) {
+          showLightBox();
+        }
       }
-      // create the cookie and show the lightbox
-      createCookie(cookieName, "true", 1);
-      showLightBox();
     }
+    lightboxHandler(previewMode, previewType, cookieName, timeVal);
 
     // Function to show the lightbox
     function showLightBox() {
@@ -217,8 +243,9 @@
       var i = document.createElement("DIV");
       i.id = "lightboxAppend";
 
-      // Append to the body
-      document.getElementsByTagName("body")[0].appendChild(i);
+      //Append to the body
+      // document.getElementsByTagName("body")[0].appendChild(i);  //---> puts data inside an element at the last index; while.
+      document.getElementsByTagName("body")[0].prepend(i); //---> needs to be set to be the first element for screen readers
 
       // Set the html of the new div to be our lightbox
       i.innerHTML = popup;
