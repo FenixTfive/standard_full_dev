@@ -2,7 +2,6 @@
   :root {
     --main-header-color: #5a6227;
   }
-
   .rkd-TAKEOVER-000-lightbox-overlay {
     position: fixed;
     top: 0;
@@ -47,14 +46,13 @@
     color: #fff;
     padding: 0 12%;
     background-color: var(--main-header-color);
-    z-index: 1025000000;
+    text-decoration: none;
   }
 
   .rkd-TAKEOVER-000-content {
     display: inline-block;
     position: relative;
     width: 100%;
-    /* height: auto; */
   }
 
   a.rkd-TAKEOVER-000-donate-now {
@@ -67,7 +65,7 @@
   .rkd-TAKEOVER-000-desk-content {
     display: block;
     width: 100vw;
-    height: 90vh;
+    height: 93vh;
     margin: 0 auto;
     box-shadow: none;
   }
@@ -90,17 +88,25 @@
       padding: 0 12%;
       background-color: var(--main-header-color);
       text-align: center;
+      text-decoration: none !important;
     }
-
     .rkd-TAKEOVER-000-desktop-lb,
-    .rkd-TAKEOVER-000-desk-content,
-    .rkd-TAKEOVER-000-desktop-overlay {
-      display: none !important;
+    .rkd-TAKEOVER-000-desk-content {
+      display: none;
     }
-    .rkd-TAKEOVER-000-mobile-lb,
-    .rkd-TAKEOVER-000-mobile-overlay {
+    .rkd-TAKEOVER-000-mobile-lb {
       display: block;
     }
+    /* .rkd-TAKEOVER-000-popup,
+    .rkd-TAKEOVER-000-lightbox-overlay,
+    .rkd-TAKEOVER-000-desktop-lb,
+    .rkd-TAKEOVER-000-desk-content,
+    .rkd-TAKEOVER-000-mobile-lb,
+    .rkd-TAKEOVER-000-mobile-content,
+    .rkd-TAKEOVER-000-mobile-close-btn,
+    .rkd-TAKEOVER-000-close-btn {
+      display: none !important;
+    } */
   }
   @media screen and (max-width: 768px) {
     .rkd-TAKEOVER-000-close-header a.rkd-TAKEOVER-000-mobile-close-btn {
@@ -127,11 +133,9 @@
 
 <script type="text/javascript">
   (function () {
+    //replace CLIENT and TITLE in lowercase
     var cookieName = "lb_CLIENT_2021_TITLE_takeover";
     var previewMode = true;
-    var previewType = "session"; //always: display always the LB --  session: Display the LB per session storage -- standard: Display de LB per day, hours, minutes
-    var timeVal = 1; //applies with standard
-    var desktopOnly = false;
 
     // Create cookies function
     function createCookie(name, value, days) {
@@ -146,65 +150,25 @@
       document.cookie = name + "=" + value + expires + "; path=/";
     }
 
-    //Handler for live and preview mode
-    function lightboxHandler(previewMode, previewType, cookieName, timeVal) {
-      //Lightbox in live mode
-      if (!previewMode) {
-        switch (previewType) {
-          case "always":
-            showLightBox(); //display the LB always
-            break;
-          case "session":
-            // analized if a session coolie exist
-            var isNewSession = sessionStorage.getItem(cookieName)
-              ? false
-              : true;
-            // Review if the SB was previously displayed
-            if (!isNewSession) {
-              return;
-            }
-            showLightBox(); // Show Lightbox
-            sessionStorage.setItem(cookieName, "displayed"); // Create the session variable
-            console.log("session");
-            break;
+    // Variable to add the cookie name to the test url
+    var testingUrl = new RegExp(cookieName);
 
-          default:
-            //review if the LB was displayed before
-            if (document.cookie.indexOf(cookieName) !== -1) {
-              return;
-            }
-
-            createCookie(cookieName, "true", timeVal); //create the cookie and show the lightbox
-            showLightBox();
-            break;
-        }
-      } else {
-        //Variable to add the cookie name to the test url
-        var testingUrl = new RegExp(cookieName);
-        //Show the lightbox in preview mode
-        if (previewMode === true && window.location.href.match(testingUrl)) {
-          showLightBox();
-        }
-      }
-    }
-    //timer handler
-    function cssHandler(desktopOnly) {
-      // timer handler
-
-      if (desktopOnly) {
-        var mobileContent = document.querySelector(
-          ".rkd-TAKEOVER-000-mobile-lb"
-        );
-        mobileContent.setAttribute("style", "display:none !important");
-        var mobileOverlay = document.querySelector(
-          ".rkd-TAKEOVER-000-mobile-overlay"
-        );
-        mobileOverlay.setAttribute("style", "display:none !important");
-      }
+    // Show the lightbox in preview mode
+    if (previewMode === true && window.location.href.match(testingUrl)) {
+      showLightBox();
     }
 
-    lightboxHandler(previewMode, previewType, cookieName, timeVal);
-    cssHandler(desktopOnly);
+    // Lightbox in live mode
+    if (previewMode == false) {
+      // review if the LB was displayed before
+      if (document.cookie.indexOf(cookieName) !== -1) {
+        return;
+      }
+      // create the cookie and show the lightbox
+      createCookie(cookieName, "true", 1);
+      showLightBox();
+    }
+
     // Function to show the lightbox
     function showLightBox() {
       var desktopImage =
@@ -223,19 +187,20 @@
       //INSTEAD OF describedby="" and id=""  we can use aria-labelledby
       var desktopId = "desktopLearnMore",
         mobileId = "mobileLearnMore",
-        descriptionText =
-          "Become an ally for veteran empowerment and provide support that veterans and their families can count on. Learn more";
+        descriptionText = "";
 
       var popup =
-        '<div class="rkd-TAKEOVER-000-popup rkd-TAKEOVER-000-desktop-lb"><div class="rkd-TAKEOVER-000-container"><div class="rkd-TAKEOVER-000-close-header"><a href="#" class="rkd-TAKEOVER-000-close-btn">Continue to <strong>' +
+        '<div class="rkd-TAKEOVER-000-popup .rkd-TAKEOVER-000-desktop-lb"><div class="rkd-TAKEOVER-000-container"><div class="rkd-TAKEOVER-000-close-header"><a href="#" class="rkd-TAKEOVER-000-close-btn">Continue to <strong>' +
         continueName +
         ' &raquo;</strong></a></div><div class="rkd-TAKEOVER-000-content"><a describedby="' +
         desktopId +
-        '" class="rkd-TAKEOVER-000-donate-now" href="' +
+        '"  class="rkd-TAKEOVER-000-donate-now" href="' +
         urlLink +
         '"><img src="' +
         desktopImage +
-        '" class="rkd-TAKEOVER-000-desk-content"></a></div></div></div><div class="rkd-TAKEOVER-000-lightbox-overlay rkd-TAKEOVER-000-desktop-overlay"></div>"' +
+        '" alt="' +
+        descriptionText +
+        '" class="rkd-TAKEOVER-000-desk-content"></a></div></div></div><div class="rkd-TAKEOVER-000-lightbox-overlay"></div>"' +
         '"<div class="rkd-TAKEOVER-000-popup rkd-TAKEOVER-000-mobile-lb"><div class="rkd-TAKEOVER-000-close-header"><a href="#" class="rkd-TAKEOVER-000-mobile-close-btn">Continue to <strong>' +
         continueName +
         ' &raquo;</strong></a></div><a describedby="' +
@@ -244,19 +209,25 @@
         (mobileUrlLink || urlLink) +
         '"><img src="' +
         mobileImage +
-        '" class="rkd-TAKEOVER-000-mobile-content"/></a></div></div></div><div class="rkd-TAKEOVER-000-lightbox-overlay rkd-TAKEOVER-000-mobile-overlay"></div>';
+        '" alt="' +
+        descriptionText +
+        '" class="rkd-TAKEOVER-000-mobile-content"/></a></div></div></div><div class="rkd-TAKEOVER-000-lightbox-overlay"></div>';
 
       // Create a new holder div for the lightbox
       var i = document.createElement("DIV");
       i.id = "lightboxAppend";
 
-      //Append to the body
-      // document.getElementsByTagName("body")[0].appendChild(i);  //---> puts data inside an element at the last index; while.
-      document.getElementsByTagName("body")[0].prepend(i); //---> needs to be set to be the first element for screen readers
+      // Append to the body
+      document.getElementsByTagName("body")[0].appendChild(i);
 
       // Set the html of the new div to be our lightbox
       i.innerHTML = popup;
-
+      //Prevent default when close button is clicked
+      document
+        .querySelector(".rkd-TAKEOVER-000-popup .rkd-TAKEOVER-000-close-btn")
+        .addEventListener("click", function (e) {
+          e.preventDefault();
+        });
       //Grab the dark overlay and lightbox from the dom
       var overlay = document.querySelector(
         ".rkd-TAKEOVER-000-lightbox-overlay"
@@ -272,13 +243,6 @@
       // Show the lightbox
       overlay.style.display = "block";
       popupLightbox.style.display = "block";
-
-      //Prevent default when close button is clicked
-      document
-        .querySelector(".rkd-TAKEOVER-000-popup .rkd-TAKEOVER-000-close-btn")
-        .addEventListener("click", function (e) {
-          e.preventDefault();
-        });
 
       //Remove the lightbox when the close button is clicked
       for (var i = 0; i < popupLightboxCloser.length; i++) {
