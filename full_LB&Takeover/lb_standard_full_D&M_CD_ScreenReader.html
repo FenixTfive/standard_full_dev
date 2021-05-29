@@ -3,10 +3,9 @@
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 10100;
+    z-index: 1010000;
     width: 100%;
     height: 100%;
-    /* //background: rgba(0,0,0,.6) url(https://s3.amazonaws.com/images.rkd.io/common/overlay-trans.png) scroll repeat 0 0; */
     background-color: rgba(0, 0, 0, 0.6);
   }
   .rkd-000-popup {
@@ -15,7 +14,7 @@
     top: 10%;
     left: 0.1%;
     right: 0.1%;
-    z-index: 10110;
+    z-index: 1011000;
     width: 100%;
     max-width: 600px;
   }
@@ -45,37 +44,12 @@
   }
   a.rkd-000-donate-now {
     border-bottom: none !important;
-    outline: none !important;
-    display: inline-block;
   }
   .rkd-000-mob-content {
     display: none;
   }
   .rkd-000-mobile-lb {
     display: none;
-  }
-  @media (max-width: 600px) {
-    .rkd-000-popup {
-      width: 90%;
-    }
-    .rkd-000-desktop-lb,
-    .rkd-000-desk-content,
-    .rkd-000-countdown-desktop {
-      display: none;
-    }
-    .rkd-000-mobile-lb {
-      display: block;
-    }
-    .rkd-000-mobile-content {
-      width: 100%;
-      box-shadow: 0px 0px 30px #000000;
-    }
-    .rkd-000-popup,
-    .rkd-000-lightbox-overlay,
-    .rkd-000-desk-content,
-    .rkd-000-close-button {
-      display: none !important;
-    }
   }
   .rkd-000-countdown-desktop {
     bottom: 0%;
@@ -86,26 +60,8 @@
   }
 
   @media screen and (max-width: 600px) {
-    .rkd-000-mobile-content {
-      width: 100%;
-      box-shadow: 0px 0px 30px #000000;
-      background: rgba(0, 0, 0, 0.4);
-    }
     .rkd-000-popup {
       width: 90%;
-    }
-    .rkd-000-popup .rkd-000-close-button {
-      top: -35px;
-      margin: 0;
-      opacity: 1;
-      position: absolute;
-      right: -2px;
-      background-color: #fff;
-      color: #000;
-      width: 24px;
-      height: 24px;
-      line-height: 19px;
-      font-size: 21px;
     }
     .rkd-000-desktop-lb,
     .rkd-000-desk-content,
@@ -114,12 +70,25 @@
     }
     .rkd-000-mobile-lb {
       display: block;
+      /* position: absolute; only for LB in ABS */
     }
+
     .rkd-000-mobile-content {
       width: 100%;
       box-shadow: 0px 0px 30px #000000;
+      background: rgba(0, 0, 0, 0.4);
     }
-
+    .rkd-000-popup .rkd-000-close-button {
+      top: -35px;
+      right: 0px;
+      font-size: 20px;
+      width: 28px;
+      height: 28px;
+      line-height: 27px;
+      font-weight: bold;
+      /*background-color: #084c66;*/
+      color: #fff;
+    }
     #lightboxAppend > div.rkd-000-popup > div.rkd-000-closing-footer > a > img {
       height: 20px;
     }
@@ -137,12 +106,14 @@
       position: absolute;
       /* display: none; */
     }
+    /*.rkd-000-popup, .rkd-000-lightbox-overlay, .rkd-000-desk-content, .rkd-000-close-button {
+            display: none !important;
+        }*/
   }
 </style>
 <script type="text/javascript">
   (function () {
-    //replace CLIENT and TITLE in lowercase
-    var cookieName = "lb_CLIENT_2020_TITLE";
+    var cookieName = "lb_CLIENT_2021_TITLE";
     var previewMode = true;
     var previewType = "standard"; //always: display always the LB --  session: Display the LB per session storage -- standard: Display de LB per day, hours, minutes
     var timeVal = 1; //applies with standard (time for per user)
@@ -159,6 +130,7 @@
       }
       document.cookie = name + "=" + value + expires + "; path=/";
     }
+
     //Handler for live and preview mode
     function lightboxHandler(previewMode, previewType, cookieName, timeVal) {
       //Lightbox in live mode
@@ -216,7 +188,6 @@
 
     //Function to show the lightbox
     function showLightBox() {
-      //-----------------visual information
       var mobileImage =
           "https://s3.amazonaws.com/xtemp19.lb/XFBRO/XFBRO-14199-Annual-Fund-Match-Lightbox-v02-(1).jpg",
         desktopimage =
@@ -224,7 +195,8 @@
         urlDF =
           "http://www.foodbankcenc.org/site/Donation2?df_id=11323&mfc_pref=T&11323.donation=form1",
         mobileUrlLink = "",
-        timerImage = "https://img1.niftyimages.com/s31/s8yo/-f5d";
+        timer = "https://img1.niftyimages.com/s31/s8yo/-f5d";
+
       //---------------------Screen reader variables
       //    (1) the tags <img> which contains the hero and description must have an ID an a ALT with the text that is on the image
       //        * id="id_name" alt="same_image_text"
@@ -239,15 +211,15 @@
       var popup =
         '<div class="rkd-000-popup rkd-000-desktop-lb"><div class="rkd-000-content"><a describedby="' +
         desktopId +
-        '"  class="rkd-000-donate-now" href="' +
+        '" class="rkd-000-donate-now" href="' +
         urlDF +
         '"><img src="' +
         desktopimage +
         '" class="rkd-000-desk-content" alt="' +
         descriptionText +
         '"/><img src="' +
-        timerImage +
-        '" class="rkd-000-countdown-desktop"/></a></div><div class="rkd-000-closing-footer"><a href="#" class="rkd-000-close-button">&times;</a></div></div><div class="rkd-000-lightbox-overlay rkd-000-desktop-overlay"></div><div class="rkd-000-popup rkd-000-mobile-lb"><div class="rkd-000-content"><a describedby="' +
+        timer +
+        '" class="rkd-000-countdown-desktop"/></a></div><div class="rkd-000-closing-footer"><a href="#" class="rkd-000-close-button">x</a></div></div><div class="rkd-000-lightbox-overlay rkd-000-desktop-overlay"></div><div class="rkd-000-popup rkd-000-mobile-lb"><div class="rkd-000-content"><a describedby="' +
         mobileId +
         '" class="rkd-000-donate-now" href="' +
         (mobileUrlLink || urlDF) +
@@ -256,16 +228,15 @@
         '" class="rkd-000-mobile-content" alt="' +
         descriptionText +
         '"/><img src="' +
-        timerImage +
-        '" class="rkd-000-countdown-mobile"/></a></div><div class="rkd-000-closing-footer"><a href="#" class="rkd-000-close-button">&times;</a></div></div><div class="rkd-000-lightbox-overlay rkd-000-mobile-overlay"></div>';
+        timer +
+        '" class="rkd-000-countdown-mobile"/></a></div><div class="rkd-000-closing-footer"><a href="#" class="rkd-000-close-button">x</a></div></div><div class="rkd-000-lightbox-overlay rkd-000-mobile-overlay"></div>';
 
       //Create a new holder div for the lightbox
       var i = document.createElement("DIV");
       i.id = "lightboxAppend";
 
       //Append to the body
-      // document.getElementsByTagName("body")[0].appendChild(i);  //---> puts data inside an element at the last index; while.
-      document.getElementsByTagName("body")[0].prepend(i); //---> needs to be set to be the first element for screen readers
+      document.getElementsByTagName("body")[0].appendChild(i);
 
       //Set the html of the new div to be our lightbox
       i.innerHTML = popup;
@@ -280,12 +251,6 @@
       overlay.style.display = "block";
       popupLightbox.style.display = "block";
 
-      //Prevent default when close button is clicked
-      document
-        .querySelector(".rkd-000-popup .rkd-000-close-button")
-        .addEventListener("click", function (e) {
-          e.preventDefault();
-        });
       //Remove the lightbox when the close button is clicked
       for (var i = 0; i < popupLightboxCloser.length; i++) {
         popupLightboxCloser[i].addEventListener("click", hideItFunction, false);
